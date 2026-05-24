@@ -111,7 +111,11 @@ Status:      Learning, Building, Improving Daily
 
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/AshishKumar161/AshishKumar161/output/github-contribution-grid-snake-dark.svg" />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/AshishKumar161/AshishKumar161/output/github-contribution-grid-snake-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/AshishKumar161/AshishKumar161/output/github-contribution-grid-snake.svg">
+  <img alt="GitHub contribution snake animation" src="https://raw.githubusercontent.com/AshishKumar161/AshishKumar161/output/github-contribution-grid-snake.svg">
+</picture>
 
 </div>
 
