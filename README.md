@@ -1,16 +1,8 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,50:00ff41,100:003b1f&height=200&section=header&text=Ashish%20Kumar%20Pandit&fontSize=45&fontColor=ffffff&animation=twinkling&fontAlignY=35&desc=Cybersecurity%20Enthusiast%20%7C%20AI%20Student%20%7C%20DSA%20Learner&descAlignY=55&descSize=17" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,50:00ff41,100:003b1f&height=220&section=header&text=Ashish%20Kumar%20Pandit&fontSize=45&fontColor=ffffff&animation=twinkling&fontAlignY=35&desc=Cybersecurity%20Enthusiast%20%7C%20AI%20Student%20%7C%20DSA%20Learner&descAlignY=55&descSize=17" />
 
-<img src="https://readme-typing-svg.herokuapp.com?size=27&duration=2500&pause=800&color=00FF41&center=true&vCenter=true&width=900&lines=Welcome+to+my+Cyber+Space;Cybersecurity+Enthusiast;B.Tech+Artificial+Intelligence+Student;Daily+DSA+Practice+%7C+Daily+GitHub+Push;C%2B%2B+%7C+Python+%7C+JavaScript;Learning+AI%2FML+%7C+Web+Development+%7C+Security" />
-
-</div>
-
-<div align="center">
-
-# 👨‍💻 Welcome to My Cyber Space
-
-<img src="https://readme-typing-svg.herokuapp.com?size=25&duration=2800&color=00FF41&center=true&vCenter=true&width=850&lines=Cybersecurity+Enthusiast;B.Tech+Artificial+Intelligence+Student;C%2B%2B+%7C+Python+%7C+JavaScript;Daily+DSA+Practice+%7C+Daily+GitHub+Push;Learning+AI%2FML+%7C+Web+Development+%7C+Security" />
+<img src="https://readme-typing-svg.herokuapp.com?size=27&duration=2500&pause=700&color=00FF41&center=true&vCenter=true&width=900&lines=Welcome+to+my+Cyber+Space;Cybersecurity+Enthusiast;B.Tech+Artificial+Intelligence+Student;Daily+DSA+Practice+%7C+Daily+GitHub+Push;C%2B%2B+%7C+Python+%7C+JavaScript;Learning+AI%2FML+%7C+Web+Development+%7C+Security" />
 
 </div>
 
@@ -22,18 +14,25 @@
 <img src="https://img.shields.io/github/followers/AshishKumar161?label=Followers&style=for-the-badge&color=00ff41" />
 <img src="https://img.shields.io/badge/Daily%20Coding-Active-00ff41?style=for-the-badge&logo=github" />
 <img src="https://img.shields.io/badge/Cybersecurity-Learner-00ff41?style=for-the-badge&logo=hackthebox&logoColor=white" />
+<img src="https://img.shields.io/badge/Status-Building%20Daily-00ff41?style=for-the-badge&logo=visualstudiocode&logoColor=white" />
 
 </div>
 
 ---
 
-## 🧑‍💻 About Me
+## 👨‍💻 About Me
 
-I am **Ashish Kumar Pandit**, a **B.Tech Artificial Intelligence student** with a strong interest in **Cybersecurity, Data Structures & Algorithms, AI/ML, and Web Development**.
+I am **Ashish Kumar Pandit**, a **B.Tech Artificial Intelligence student** interested in **Cybersecurity, Data Structures & Algorithms, AI/ML, and Web Development**.
 
-I am currently building my GitHub profile by doing **daily coding practice**, solving **DSA and LeetCode problems**, and creating projects that improve my practical skills.
+I am building my GitHub profile by doing **daily coding practice**, solving **DSA and LeetCode problems**, and creating practical projects.
 
 ---
+
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=0:000000,50:00ff41,100:000000&height=3&section=footer" />
+
+</div>
 
 ## 🖥️ Cyber Terminal
 
@@ -48,6 +47,12 @@ Languages   : C++ | Python | JavaScript
 Tools       : Git | GitHub | VS Code | Node.js
 Status      : Learning, Building, Improving Daily
 ```
+
+<div align="center">
+
+<img src="https://readme-typing-svg.herokuapp.com?size=20&duration=2200&pause=700&color=00FF41&center=true&vCenter=true&width=850&lines=%24+Initializing+Cyber+Profile...;%24+Loading+DSA+Practice...;%24+Scanning+GitHub+Activity...;%24+Building+AI%2FML+Projects...;%24+Status%3A+Active+and+Learning" />
+
+</div>
 
 ---
 
@@ -226,8 +231,12 @@ Git & GitHub         ███████░░░  Daily Push, Repositories, R
 
 <div align="center">
 
-### ⚡ Code. Learn. Build. Secure. Repeat.
+<img src="https://readme-typing-svg.herokuapp.com?size=22&duration=2500&pause=800&color=00FF41&center=true&vCenter=true&width=700&lines=Code.+Learn.+Build.+Secure.+Repeat.;Daily+Practice+Creates+Professional+Skills.;Consistency+is+the+Real+Hack." />
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:003b1f,50:00ff41,100:000000&height=120&section=footer" />
+</div>
+
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:003b1f,50:00ff41,100:000000&height=140&section=footer" />
 
 </div>
