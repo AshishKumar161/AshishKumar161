@@ -1,6 +1,10 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=00ff41&height=120&section=header&text=Ashish%20Kumar%20Pandit&fontSize=35&fontColor=ffffff&animation=fadeIn" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,50:00ff41,100:003b1f&height=200&section=header&text=Ashish%20Kumar%20Pandit&fontSize=45&fontColor=ffffff&animation=twinkling&fontAlignY=35&desc=Cybersecurity%20Enthusiast%20%7C%20AI%20Student%20%7C%20DSA%20Learner&descAlignY=55&descSize=17" />
+
+<img src="https://readme-typing-svg.herokuapp.com?size=27&duration=2500&pause=800&color=00FF41&center=true&vCenter=true&width=900&lines=Welcome+to+my+Cyber+Space;Cybersecurity+Enthusiast;B.Tech+Artificial+Intelligence+Student;Daily+DSA+Practice+%7C+Daily+GitHub+Push;C%2B%2B+%7C+Python+%7C+JavaScript;Learning+AI%2FML+%7C+Web+Development+%7C+Security" />
+
+</div>
 
 # 👋 Hi, I'm Ashish Kumar Pandit
 
