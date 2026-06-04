@@ -5,15 +5,7 @@ import urllib.request
 from datetime import date
 from PIL import Image, ImageDraw
 
-# =========================
-
-# USER SETTINGS
-
-# =========================
-
 GITHUB_USER_NAME = os.environ.get("GITHUB_USER_NAME", "AshishKumar161")
-
-# 26 = recent half-year, 53 = full year but GIF will be bigger
 
 LAST_WEEKS = 26
 
@@ -29,18 +21,16 @@ INITIAL_SNAKE_LENGTH = 18
 GROW_PER_FOOD = 4
 MAX_EXTRA_GROW = 8
 
-# Cyber colors
-
 BG = (13, 17, 23)
 GRID_EMPTY = (22, 27, 34)
 GRID_BORDER = (0, 110, 55)
 
 LEVEL_COLORS = [
-(22, 27, 34),     # 0 contributions
-(14, 68, 41),     # low
-(0, 109, 50),     # medium
-(38, 166, 65),    # high
-(57, 211, 83),    # very high
+(22, 27, 34),
+(14, 68, 41),
+(0, 109, 50),
+(38, 166, 65),
+(57, 211, 83),
 ]
 
 SNAKE_BODY = (0, 255, 65)
@@ -137,8 +127,6 @@ total = 0
 for x, week in enumerate(weeks):
     for day in week["contributionDays"]:
         d = date.fromisoformat(day["date"])
-
-        # GitHub contribution grid starts with Sunday at row 0
         y = (d.weekday() + 1) % 7
 
         count = int(day["contributionCount"])
@@ -175,8 +163,6 @@ for i in range(len(cell_path) - 1):
 
     for step in range(FRAMES_PER_CELL):
         t = step / FRAMES_PER_CELL
-
-        # Smooth movement
         smooth = t * t * (3 - 2 * t)
 
         px = x1 + (x2 - x1) * smooth
@@ -213,7 +199,6 @@ count = counts.get((x, y), 0)
 
         draw.rounded_rectangle(cell_rect(x, y), radius=4, fill=fill)
 
-        # Real contribution block glow
         if count > 0 and (x, y) not in eaten:
             rect = cell_rect(x, y)
             glow = [rect[0] - 2, rect[1] - 2, rect[2] + 2, rect[3] + 2]
@@ -225,7 +210,6 @@ if len(body_points) < 2:
 return
 
 ```
-# Draw tail first, head last
 sampled = body_points[::2]
 
 if sampled[-1] != body_points[-1]:
@@ -236,10 +220,7 @@ n = max(1, len(sampled) - 1)
 for i, (x, y) in enumerate(sampled):
     progress = i / n
 
-    # Tail small, head side big
     radius = 2.2 + progress * 5.4
-
-    # Brighter near head
     green = int(SNAKE_BODY_DARK[1] + progress * (SNAKE_BODY[1] - SNAKE_BODY_DARK[1]))
     fill = (0, green, 65)
 
@@ -248,7 +229,6 @@ for i, (x, y) in enumerate(sampled):
         fill=fill,
     )
 
-# Head
 hx, hy = body_points[-1]
 px, py = body_points[-2]
 
@@ -259,7 +239,6 @@ length = math.hypot(dx, dy) or 1
 dx /= length
 dy /= length
 
-# Perpendicular vector for eyes
 nx = -dy
 ny = dx
 
@@ -277,7 +256,6 @@ draw.ellipse(
     fill=SNAKE_HEAD_INNER,
 )
 
-# Eyes
 eye_forward = 3.6
 eye_side = 3.0
 
@@ -307,7 +285,6 @@ for index, head_point in enumerate(points):
     head_cell = cells_for_frame[index]
     count = counts.get(head_cell, 0)
 
-    # Snake eats only real contribution blocks
     if count > 0 and head_cell not in eaten:
         eaten.add(head_cell)
         snake_length += GROW_PER_FOOD + min(count, MAX_EXTRA_GROW)
@@ -336,10 +313,8 @@ cols, rows, counts, total = build_grid(calendar)
 
 frames = create_frames(cols, rows, counts)
 
-output_path = "dist/custom-snake.gif"
-
 frames[0].save(
-    output_path,
+    "dist/custom-snake.gif",
     save_all=True,
     append_images=frames[1:],
     duration=FRAME_DURATION_MS,
@@ -350,7 +325,7 @@ frames[0].save(
 
 frames[0].save("dist/custom-snake-preview.png")
 
-print(f"Generated {output_path}")
+print("Generated dist/custom-snake.gif")
 print(f"User: {GITHUB_USER_NAME}")
 print(f"Real contributions in shown weeks: {total}")
 print(f"Frames: {len(frames)}")
@@ -358,3 +333,4 @@ print(f"Frames: {len(frames)}")
 
 if **name** == "**main**":
 main()
+
