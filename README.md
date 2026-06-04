@@ -113,15 +113,11 @@ Status:      Learning, Building, Improving Daily
 
 ---
 
-## 🐍 Contribution Snake Animation
+## 🐍 Custom Growing Snake Animation
 
 <div align="center">
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/AshishKumar161/AshishKumar161/output/github-contribution-grid-snake-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/AshishKumar161/AshishKumar161/output/github-contribution-grid-snake.svg">
-  <img alt="GitHub contribution snake animation" src="https://raw.githubusercontent.com/AshishKumar161/AshishKumar161/output/github-contribution-grid-snake.svg">
-</picture>
+<img src="https://raw.githubusercontent.com/AshishKumar161/AshishKumar161/output/custom-snake.gif?v=1" alt="Custom Cyber Growing Snake Animation" />
 
 </div>
 
