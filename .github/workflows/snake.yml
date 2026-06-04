@@ -1,4 +1,4 @@
-name: Generate Snake Animation
+name: Generate Custom Snake GIF
 
 on:
   schedule:
@@ -8,26 +8,30 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   generate:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-
-    permissions:
-      contents: write
 
     steps:
-      - name: Generate GitHub contribution snake
-        uses: Platane/snk/svg-only@v3
-        with:
-          github_user_name: AshishKumar161
-          outputs: |
-            dist/github-contribution-grid-snake.svg
-            dist/github-contribution-grid-snake-dark.svg?palette=github-dark
-            dist/github-contribution-grid-snake-green.svg?color_snake=#00ff41&color_dots=#161b22,#0e4429,#006d32,#26a641,#39d353
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Push snake animation to output branch
-        uses: crazy-max/ghaction-github-pages@v3.1.0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Pillow
+        run: pip install pillow
+
+      - name: Generate custom snake GIF
+        run: python scripts/generate_snake_gif.py
+
+      - name: Publish generated files to output branch
+        uses: crazy-max/ghaction-github-pages@v4
         with:
           target_branch: output
           build_dir: dist
