@@ -1,39 +1,45 @@
-name: Generate Custom Snake GIF
+name: Generate Real Growing Snake
 
 on:
-  schedule:
-    - cron: "0 0 * * *"
-  workflow_dispatch:
-  push:
-    branches:
-      - main
+schedule:
+- cron: "0 0 * * *"
+workflow_dispatch:
+push:
+branches:
+- main
 
 permissions:
-  contents: write
+contents: write
 
 jobs:
-  generate:
-    runs-on: ubuntu-latest
+generate:
+runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+```
+env:
+  GITHUB_USER_NAME: AshishKumar161
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+steps:
+  - name: Checkout repository
+    uses: actions/checkout@v4
 
-      - name: Install Pillow
-        run: pip install pillow
+  - name: Set up Python
+    uses: actions/setup-python@v5
+    with:
+      python-version: "3.11"
 
-      - name: Generate custom snake GIF
-        run: python scripts/generate_snake_gif.py
+  - name: Install Pillow
+    run: pip install pillow
 
-      - name: Publish generated files to output branch
-        uses: crazy-max/ghaction-github-pages@v4
-        with:
-          target_branch: output
-          build_dir: dist
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  - name: Generate real contribution growing snake
+    run: python scripts/generate_snake_gif.py
+
+  - name: Publish generated snake to output branch
+    uses: crazy-max/ghaction-github-pages@v4
+    with:
+      target_branch: output
+      build_dir: dist
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
