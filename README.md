@@ -113,13 +113,14 @@ Status:      Learning, Building, Improving Daily
 
 ---
 
-## 🐍 Custom Growing Snake Animation
+## 🐍 Real Growing Contribution Snake
 
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/AshishKumar161/AshishKumar161/output/custom-snake.gif?v=1" alt="Custom Cyber Growing Snake Animation" />
+<img width="100%" src="https://raw.githubusercontent.com/AshishKumar161/AshishKumar161/output/custom-snake.gif?v=5" alt="Real GitHub Contribution Growing Snake Animation" />
 
 </div>
+
 
 ---
 
