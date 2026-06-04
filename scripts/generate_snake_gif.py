@@ -6,7 +6,6 @@ from datetime import date
 from PIL import Image, ImageDraw
 
 GITHUB_USER_NAME = os.environ.get("GITHUB_USER_NAME", "AshishKumar161")
-
 LAST_WEEKS = 26
 
 CELL = 14
@@ -75,7 +74,7 @@ req = urllib.request.Request(
     headers={
         "Authorization": f"Bearer {token}",
         "Content-Type": "application/json",
-        "User-Agent": "real-contribution-snake-generator"
+        "User-Agent": "real-contribution-snake-generator",
     },
     method="POST",
 )
@@ -333,4 +332,3 @@ print(f"Frames: {len(frames)}")
 
 if **name** == "**main**":
 main()
-
