@@ -1,12 +1,14 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,50:00ff41,100:003b1f&height=200&section=header&text=Ashish%20Kumar%20Pandit&fontSize=45&fontColor=ffffff&animation=twinkling&fontAlignY=35&desc=Cybersecurity%20Enthusiast%20%7C%20AI%20Student%20%7C%20DSA%20Learner&descAlignY=55&descSize=17" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,50:00ff41,100:003b1f&height=220&section=header&text=Ashish%20Kumar%20Pandit&fontSize=45&fontColor=ffffff&animation=twinkling&fontAlignY=35&desc=Cybersecurity%20Enthusiast%20%7C%20AI%20Student%20%7C%20DSA%20Learner&descAlignY=55&descSize=17" />
 
 <img src="https://readme-typing-svg.herokuapp.com?size=27&duration=2500&pause=800&color=00FF41&center=true&vCenter=true&width=900&lines=Welcome+to+my+Cyber+Space;Cybersecurity+Enthusiast;B.Tech+Artificial+Intelligence+Student;Daily+DSA+Practice+%7C+Daily+GitHub+Push;C%2B%2B+%7C+Python+%7C+JavaScript;Learning+AI%2FML+%7C+Web+Development+%7C+Security" />
 
 </div>
 
 # 👋 Hi, I'm Ashish Kumar Pandit
+
+<div align="center">
 
 <img src="https://readme-typing-svg.herokuapp.com?size=24&duration=3000&color=00FF41&center=true&vCenter=true&width=800&lines=Cybersecurity+Enthusiast;B.Tech+Artificial+Intelligence+Student;C%2B%2B+%7C+Python+%7C+DSA+Learner;Daily+GitHub+Push+%7C+Daily+DSA+Practice;Learning+AI%2FML+%26+Full+Stack+Development" />
 
@@ -16,9 +18,9 @@
 
 <div align="center">
 
-![Profile Views](https://komarev.com/ghpvc/?username=AshishKumar161&label=Profile%20Visitors&color=00ff41&style=for-the-badge)
-![GitHub Followers](https://img.shields.io/github/followers/AshishKumar161?label=Followers&style=for-the-badge&color=00ff41)
-![GitHub Stars](https://img.shields.io/github/stars/AshishKumar161?label=Stars&style=for-the-badge&color=00ff41)
+![Profile Views](https://komarev.com/ghpvc/?username=AshishKumar161\&label=Profile%20Visitors\&color=00ff41\&style=for-the-badge)
+![GitHub Followers](https://img.shields.io/github/followers/AshishKumar161?label=Followers\&style=for-the-badge\&color=00ff41)
+![GitHub Stars](https://img.shields.io/github/stars/AshishKumar161?label=Stars\&style=for-the-badge\&color=00ff41)
 
 </div>
 
@@ -47,12 +49,12 @@ Status:      Learning, Building, Improving Daily
 
 ## 🔥 Current Focus
 
-- 🛡️ Learning cybersecurity fundamentals  
-- 💻 Practicing C++ and DSA daily  
-- 🧠 Solving LeetCode problems  
-- 🐍 Learning Python for AI/ML  
-- 🌐 Building web development projects  
-- 📌 Improving GitHub profile with daily commits  
+* 🛡️ Learning cybersecurity fundamentals
+* 💻 Practicing C++ and DSA daily
+* 🧠 Solving LeetCode problems
+* 🐍 Learning Python for AI/ML
+* 🌐 Building web development projects
+* 📌 Improving GitHub profile with daily commits
 
 ---
 
@@ -68,14 +70,14 @@ Status:      Learning, Building, Improving Daily
 
 ## 📌 Featured Repositories
 
-| Project | Description |
-|---|---|
+| Project                           | Description                                         |
+| --------------------------------- | --------------------------------------------------- |
 | 🛡️ Cyber-Threat-Report-Generator | Cybersecurity project for generating threat reports |
-| 📚 DSA-Daily-Practice | Daily Data Structures and Algorithms practice |
-| 🧩 C-Logic-Building-Exercises | C/C++ logic building problems |
-| 🐍 Python-Mastery-Core | Python fundamentals and practice |
-| 🌐 Full-Stack-Development-Journey | Web development learning journey |
-| ⚡ LeetCode-Solutions | Daily LeetCode problem solutions |
+| 📚 DSA-Daily-Practice             | Daily Data Structures and Algorithms practice       |
+| 🧩 C-Logic-Building-Exercises     | C/C++ logic building problems                       |
+| 🐍 Python-Mastery-Core            | Python fundamentals and practice                    |
+| 🌐 Full-Stack-Development-Journey | Web development learning journey                    |
+| ⚡ LeetCode-Solutions              | Daily LeetCode problem solutions                    |
 
 ---
 
@@ -83,9 +85,9 @@ Status:      Learning, Building, Improving Daily
 
 <div align="center">
 
-<img src="https://github-readme-stats.vercel.app/api?username=AshishKumar161&show_icons=true&theme=chartreuse-dark&hide_border=true" />
+<img width="48%" src="https://github-readme-stats.vercel.app/api?username=AshishKumar161&show_icons=true&theme=chartreuse-dark&hide_border=true" />
 
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=AshishKumar161&layout=compact&theme=chartreuse-dark&hide_border=true" />
+<img width="48%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=AshishKumar161&layout=compact&theme=chartreuse-dark&hide_border=true" />
 
 </div>
 
@@ -101,14 +103,11 @@ Status:      Learning, Building, Improving Daily
 
 ---
 
-
----
-
 ## 📈 Contribution Activity
 
 <div align="center">
 
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=AshishKumar161&theme=chartreuse-dark&hide_border=true" />
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=AshishKumar161&theme=chartreuse-dark&hide_border=true&area=true" />
 
 </div>
 
@@ -157,6 +156,7 @@ Status:      Learning, Building, Improving Daily
 
 ### ⚡ Code. Learn. Build. Secure. Repeat.
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=00ff41&height=100&section=footer" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:003b1f,50:00ff41,100:000000&height=120&section=footer" />
 
 </div>
+
