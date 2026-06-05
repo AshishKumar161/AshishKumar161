@@ -1,7 +1,6 @@
 import json
 import math
 import os
-import random
 import urllib.request
 from collections import deque
 from datetime import date
@@ -20,14 +19,13 @@ PADDING_Y = 20
 FRAMES_PER_CELL = 4
 FRAME_DURATION_MS = 45
 
-MAX_RANDOM_STEPS = 700
-EXTRA_STEPS_AFTER_ALL_EATEN = 40
-TARGET_CHASE_CHANCE = 0.78
-
 INITIAL_SNAKE_LENGTH = 12
 GROW_PER_FOOD = 5
 MAX_GROW_FROM_ONE_DAY = 10
 MAX_SNAKE_LENGTH = 180
+
+MAX_SEGMENT_STEPS = 500
+MAX_RESTARTS = 8
 
 BG = (13, 17, 23)
 PANEL = (8, 13, 20)
@@ -86,7 +84,7 @@ def fetch_contribution_calendar(username):
         headers={
             "Authorization": f"Bearer {token}",
             "Content-Type": "application/json",
-            "User-Agent": "random-no-overlap-snake",
+            "User-Agent": "left-start-restart-snake",
         },
         method="POST",
     )
@@ -167,87 +165,146 @@ def manhattan(a, b):
     return abs(a[0] - b[0]) + abs(a[1] - b[1])
 
 
-def choose_start(cols, rows, food_cells):
-    if food_cells:
-        fx, fy = random.choice(list(food_cells))
-        candidates = neighbors((fx, fy), cols, rows)
-        if candidates:
-            return random.choice(candidates)
-    return (random.randint(0, cols - 1), random.randint(0, rows - 1))
+def row_priority(rows, target_y):
+    return sorted(range(rows), key=lambda y: (abs(y - target_y), y))
 
 
-def build_non_overlapping_cell_path(cols, rows, counts):
-    food_cells = {cell for cell, count in counts.items() if count > 0}
+def choose_left_start(cols, rows, remaining_food):
+    target_y = rows // 2
 
-    head = choose_start(cols, rows, food_cells)
-    body = deque([head])
-    body_set = {head}
-    eaten = set()
-    path = [head]
+    if remaining_food:
+        leftmost_target = min(remaining_food, key=lambda c: (c[0], abs(c[1] - rows // 2)))
+        target_y = leftmost_target[1]
 
-    snake_length = INITIAL_SNAKE_LENGTH
-    previous = None
-    target = None
-    extra_steps = 0
+    for x in range(min(3, cols)):
+        for y in row_priority(rows, target_y):
+            return (x, y)
 
-    for _ in range(MAX_RANDOM_STEPS):
-        if head in food_cells and head not in eaten:
-            eaten.add(head)
-            snake_length += GROW_PER_FOOD + min(counts.get(head, 0), MAX_GROW_FROM_ONE_DAY)
-            snake_length = min(snake_length, MAX_SNAKE_LENGTH)
+    return (0, rows // 2)
 
-        remaining_food = list(food_cells - eaten)
 
-        if not remaining_food:
-            extra_steps += 1
-            if extra_steps >= EXTRA_STEPS_AFTER_ALL_EATEN:
-                break
-            target = None
-        else:
-            if target not in remaining_food or random.random() < 0.20:
-                remaining_food.sort(key=lambda cell: manhattan(head, cell))
-                target = random.choice(remaining_food[:min(8, len(remaining_food))])
+def bfs_path(start, goal, cols, rows, blocked, allow_tail=None):
+    blocked = set(blocked)
+    blocked.discard(start)
 
-        next_moves = neighbors(head, cols, rows)
+    if allow_tail is not None:
+        blocked.discard(allow_tail)
 
-        # avoid current body overlap
-        filtered = [cell for cell in next_moves if cell not in body_set]
+    q = deque([start])
+    parent = {start: None}
 
-        # if no move found, allow tail cell because tail can move away next step
-        if not filtered and len(body) > 1:
-            tail = body[0]
-            filtered = [cell for cell in next_moves if cell == tail]
+    while q:
+        cur = q.popleft()
 
-        if not filtered:
+        if cur == goal:
             break
 
-        # avoid immediate backtracking when possible
-        non_back = [cell for cell in filtered if cell != previous]
-        if non_back:
-            filtered = non_back
+        for nxt in neighbors(cur, cols, rows):
+            if nxt in parent:
+                continue
+            if nxt in blocked and nxt != goal:
+                continue
+            parent[nxt] = cur
+            q.append(nxt)
 
-        if target and random.random() < TARGET_CHASE_CHANCE:
-            best_dist = min(manhattan(cell, target) for cell in filtered)
-            best_moves = [cell for cell in filtered if manhattan(cell, target) == best_dist]
-            next_head = random.choice(best_moves)
-        else:
-            next_head = random.choice(filtered)
+    if goal not in parent:
+        return None
 
-        previous = head
-        head = next_head
+    path = []
+    cur = goal
+    while cur is not None:
+        path.append(cur)
+        cur = parent[cur]
 
-        body.append(head)
-        body_set.add(head)
-        path.append(head)
-
-        while len(body) > snake_length:
-            removed = body.popleft()
-            body_set.remove(removed)
-
+    path.reverse()
     return path
 
 
+def find_path_to_any_food(head, remaining_food, cols, rows, body_set, allow_tail):
+    if not remaining_food:
+        return None, None
+
+    candidates = sorted(
+        remaining_food,
+        key=lambda cell: (manhattan(head, cell), cell[0], cell[1])
+    )[:15]
+
+    for target in candidates:
+        path = bfs_path(head, target, cols, rows, body_set, allow_tail)
+        if path and len(path) >= 2:
+            return path, target
+
+    return None, None
+
+
+def build_segments(cols, rows, counts):
+    food_cells = {cell for cell, count in counts.items() if count > 0}
+    remaining_food = set(food_cells)
+
+    segments = []
+    restart_count = 0
+
+    while remaining_food and restart_count <= MAX_RESTARTS:
+        start = choose_left_start(cols, rows, remaining_food)
+
+        body = deque([start])
+        body_set = {start}
+        snake_length = INITIAL_SNAKE_LENGTH
+
+        segment = [start]
+        step_count = 0
+
+        if start in remaining_food:
+            remaining_food.remove(start)
+            snake_length += GROW_PER_FOOD + min(counts.get(start, 0), MAX_GROW_FROM_ONE_DAY)
+            snake_length = min(snake_length, MAX_SNAKE_LENGTH)
+
+        while remaining_food and step_count < MAX_SEGMENT_STEPS:
+            head = body[-1]
+            tail = body[0]
+
+            path, _ = find_path_to_any_food(head, remaining_food, cols, rows, body_set, tail)
+
+            if not path:
+                break
+
+            next_head = path[1]
+
+            # move
+            body.append(next_head)
+            body_set.add(next_head)
+            segment.append(next_head)
+
+            ate_food = False
+
+            if next_head in remaining_food:
+                remaining_food.remove(next_head)
+                snake_length += GROW_PER_FOOD + min(counts.get(next_head, 0), MAX_GROW_FROM_ONE_DAY)
+                snake_length = min(snake_length, MAX_SNAKE_LENGTH)
+                ate_food = True
+
+            if not ate_food:
+                while len(body) > snake_length:
+                    removed = body.popleft()
+                    body_set.remove(removed)
+            else:
+                while len(body) > snake_length:
+                    removed = body.popleft()
+                    body_set.remove(removed)
+
+            step_count += 1
+
+        segments.append(segment)
+        restart_count += 1
+
+    return segments
+
+
 def smooth_points(cell_path):
+    if len(cell_path) == 1:
+        point = center_of_cell(*cell_path[0])
+        return [point], [cell_path[0]]
+
     points = []
     cell_at_frame = []
 
@@ -311,40 +368,38 @@ def draw_snake_head(draw, hx, hy, dx, dy):
     nx = -dy
     ny = dx
 
-    # oval head
-    head_w = 9
-    head_h = 7
+    nose = (hx + dx * 10, hy + dy * 10)
+    left = (hx - dx * 6 + nx * 7, hy - dy * 6 + ny * 7)
+    right = (hx - dx * 6 - nx * 7, hy - dy * 6 - ny * 7)
+    back = (hx - dx * 10, hy - dy * 10)
 
-    draw.ellipse(
-        [hx - head_w, hy - head_h, hx + head_w, hy + head_h],
-        fill=SNAKE_HEAD,
-    )
+    draw.polygon([nose, left, back, right], fill=SNAKE_HEAD)
 
-    draw.ellipse(
-        [hx - 5, hy - 4, hx + 5, hy + 4],
-        fill=SNAKE_HEAD_INNER,
-    )
+    nose2 = (hx + dx * 5, hy + dy * 5)
+    left2 = (hx - dx * 3 + nx * 4, hy - dy * 3 + ny * 4)
+    right2 = (hx - dx * 3 - nx * 4, hy - dy * 3 - ny * 4)
+    back2 = (hx - dx * 5, hy - dy * 5)
 
-    # eyes
+    draw.polygon([nose2, left2, back2, right2], fill=SNAKE_HEAD_INNER)
+
     for side in (-1, 1):
-        ex = hx + dx * 3.2 + nx * 2.6 * side
-        ey = hy + dy * 3.2 + ny * 2.6 * side
-        draw.ellipse([ex - 1.4, ey - 1.4, ex + 1.4, ey + 1.4], fill=WHITE)
-        draw.ellipse([ex - 0.5, ey - 0.5, ex + 0.5, ey + 0.5], fill=BLACK)
+        ex = hx + dx * 2.8 + nx * 2.6 * side
+        ey = hy + dy * 2.8 + ny * 2.6 * side
+        draw.ellipse([ex - 1.5, ey - 1.5, ex + 1.5, ey + 1.5], fill=WHITE)
+        draw.ellipse([ex - 0.6, ey - 0.6, ex + 0.6, ey + 0.6], fill=BLACK)
 
-    # tongue
     sx = hx + dx * 7
     sy = hy + dy * 7
     mx = hx + dx * 11
     my = hy + dy * 11
-    left_x = mx + nx * 1.5
-    left_y = my + ny * 1.5
-    right_x = mx - nx * 1.5
-    right_y = my - ny * 1.5
+    lx = mx + nx * 1.4
+    ly = my + ny * 1.4
+    rx = mx - nx * 1.4
+    ry = my - ny * 1.4
 
     draw.line([(sx, sy), (mx, my)], fill=TONGUE, width=2)
-    draw.line([(mx, my), (left_x, left_y)], fill=TONGUE, width=1)
-    draw.line([(mx, my), (right_x, right_y)], fill=TONGUE, width=1)
+    draw.line([(mx, my), (lx, ly)], fill=TONGUE, width=1)
+    draw.line([(mx, my), (rx, ry)], fill=TONGUE, width=1)
 
 
 def draw_snake(draw, body_points):
@@ -354,11 +409,9 @@ def draw_snake(draw, body_points):
     draw.line(body_points, fill=SNAKE_OUTER, width=10, joint="curve")
     draw.line(body_points, fill=SNAKE_INNER, width=6, joint="curve")
 
-    # tail
     tx, ty = body_points[0]
     draw.ellipse([tx - 3.5, ty - 3.5, tx + 3.5, ty + 3.5], fill=SNAKE_INNER)
 
-    # head direction
     hx, hy = body_points[-1]
     px, py = body_points[-2]
 
@@ -375,46 +428,50 @@ def create_frames(cols, rows, counts):
     width = PADDING_X * 2 + cols * CELL + (cols - 1) * GAP
     height = PADDING_Y * 2 + rows * CELL + (rows - 1) * GAP
 
-    cell_path = build_non_overlapping_cell_path(cols, rows, counts)
-    points, cell_at_frame = smooth_points(cell_path)
+    segments = build_segments(cols, rows, counts)
 
     frames = []
     eaten = set()
-    snake_length = INITIAL_SNAKE_LENGTH
 
-    for frame_index in range(len(points)):
-        head_cell = cell_at_frame[frame_index]
-        count = counts.get(head_cell, 0)
+    for segment in segments:
+        points, cell_at_frame = smooth_points(segment)
+        snake_length = INITIAL_SNAKE_LENGTH
 
-        if count > 0 and head_cell not in eaten:
-            eaten.add(head_cell)
-            snake_length += GROW_PER_FOOD + min(count, MAX_GROW_FROM_ONE_DAY)
-            snake_length = min(snake_length, MAX_SNAKE_LENGTH)
+        for frame_index in range(len(points)):
+            head_cell = cell_at_frame[frame_index]
+            count = counts.get(head_cell, 0)
 
-        start = max(0, frame_index - snake_length)
-        body_points = points[start:frame_index + 1]
+            if count > 0 and head_cell not in eaten:
+                eaten.add(head_cell)
+                snake_length += GROW_PER_FOOD + min(count, MAX_GROW_FROM_ONE_DAY)
+                snake_length = min(snake_length, MAX_SNAKE_LENGTH)
 
-        image = Image.new("RGB", (width, height), BG)
-        draw = ImageDraw.Draw(image)
+            start = max(0, frame_index - snake_length)
+            body_points = points[start:frame_index + 1]
 
-        draw_panel(draw, width, height)
-        draw_grid(draw, cols, rows, counts, eaten)
+            image = Image.new("RGB", (width, height), BG)
+            draw = ImageDraw.Draw(image)
 
-        glow = make_snake_glow(width, height, body_points)
-        image = Image.alpha_composite(image.convert("RGBA"), glow).convert("RGB")
+            draw_panel(draw, width, height)
+            draw_grid(draw, cols, rows, counts, eaten)
 
-        draw = ImageDraw.Draw(image)
-        draw_snake(draw, body_points)
+            glow = make_snake_glow(width, height, body_points)
+            image = Image.alpha_composite(image.convert("RGBA"), glow).convert("RGB")
 
-        frames.append(image)
+            draw = ImageDraw.Draw(image)
+            draw_snake(draw, body_points)
+
+            frames.append(image)
+
+        # small pause at end of each segment
+        for _ in range(4):
+            frames.append(frames[-1].copy())
 
     return frames
 
 
 def main():
     os.makedirs("dist", exist_ok=True)
-
-    random.seed()
 
     calendar = fetch_contribution_calendar(GITHUB_USER_NAME)
     cols, rows, counts, total = build_grid(calendar)
