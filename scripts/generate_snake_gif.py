@@ -3,42 +3,32 @@ import math
 import os
 import random
 import urllib.request
+from collections import deque
 from datetime import date
 
 from PIL import Image, ImageDraw, ImageFilter
 
-# =========================================================
-# RANDOM REAL GITHUB CONTRIBUTION GROWING SNAKE
-# =========================================================
-
 GITHUB_USER_NAME = os.environ.get("GITHUB_USER_NAME", "AshishKumar161")
 
-# 53 = full year, 26 = half year
 LAST_WEEKS = 53
 
-# Clean full-year layout for README
 CELL = 10
 GAP = 3
 PADDING_X = 20
 PADDING_Y = 20
 
-# Smooth movement
 FRAMES_PER_CELL = 4
 FRAME_DURATION_MS = 45
 
-# Random movement behavior
-MAX_RANDOM_STEPS = 520
-EXTRA_STEPS_AFTER_ALL_EATEN = 45
-TARGET_CHASE_CHANCE = 0.62
-RANDOM_MOVE_CHANCE = 0.38
+MAX_RANDOM_STEPS = 700
+EXTRA_STEPS_AFTER_ALL_EATEN = 40
+TARGET_CHASE_CHANCE = 0.78
 
-# Snake growth
-INITIAL_SNAKE_LENGTH = 28
+INITIAL_SNAKE_LENGTH = 12
 GROW_PER_FOOD = 5
 MAX_GROW_FROM_ONE_DAY = 10
-MAX_SNAKE_LENGTH = 230
+MAX_SNAKE_LENGTH = 180
 
-# Colors
 BG = (13, 17, 23)
 PANEL = (8, 13, 20)
 GRID_EMPTY = (22, 27, 34)
@@ -54,10 +44,11 @@ LEVEL_COLORS = [
 
 SNAKE_OUTER = (0, 120, 55)
 SNAKE_INNER = (0, 255, 65)
-SNAKE_HEAD = (180, 0, 255)
-SNAKE_HEAD_INNER = (245, 140, 255)
+SNAKE_HEAD = (170, 0, 255)
+SNAKE_HEAD_INNER = (240, 140, 255)
 WHITE = (255, 255, 255)
-TONGUE = (255, 0, 110)
+BLACK = (0, 0, 0)
+TONGUE = (255, 40, 120)
 
 
 def fetch_contribution_calendar(username):
@@ -95,7 +86,7 @@ def fetch_contribution_calendar(username):
         headers={
             "Authorization": f"Bearer {token}",
             "Content-Type": "application/json",
-            "User-Agent": "random-real-growing-snake",
+            "User-Agent": "random-no-overlap-snake",
         },
         method="POST",
     )
@@ -149,7 +140,6 @@ def build_grid(calendar):
         for day in week["contributionDays"]:
             d = date.fromisoformat(day["date"])
             y = (d.weekday() + 1) % 7
-
             count = int(day["contributionCount"])
             counts[(x, y)] = count
             total += count
@@ -159,88 +149,100 @@ def build_grid(calendar):
 
 def neighbors(cell, cols, rows):
     x, y = cell
-    possible = []
+    result = []
 
     if x > 0:
-        possible.append((x - 1, y))
+        result.append((x - 1, y))
     if x < cols - 1:
-        possible.append((x + 1, y))
+        result.append((x + 1, y))
     if y > 0:
-        possible.append((x, y - 1))
+        result.append((x, y - 1))
     if y < rows - 1:
-        possible.append((x, y + 1))
+        result.append((x, y + 1))
 
-    return possible
+    return result
 
 
 def manhattan(a, b):
     return abs(a[0] - b[0]) + abs(a[1] - b[1])
 
 
-def choose_random_start(cols, rows, food_cells):
+def choose_start(cols, rows, food_cells):
     if food_cells:
-        # Start near a real contribution block, but not always on it.
         fx, fy = random.choice(list(food_cells))
-        options = neighbors((fx, fy), cols, rows)
-        if options:
-            return random.choice(options)
-
+        candidates = neighbors((fx, fy), cols, rows)
+        if candidates:
+            return random.choice(candidates)
     return (random.randint(0, cols - 1), random.randint(0, rows - 1))
 
 
-def build_random_path(cols, rows, counts):
+def build_non_overlapping_cell_path(cols, rows, counts):
     food_cells = {cell for cell, count in counts.items() if count > 0}
 
-    current = choose_random_start(cols, rows, food_cells)
-    previous = None
-    path = [current]
+    head = choose_start(cols, rows, food_cells)
+    body = deque([head])
+    body_set = {head}
     eaten = set()
+    path = [head]
 
-    target = random.choice(list(food_cells)) if food_cells else None
-    after_finish_steps = 0
+    snake_length = INITIAL_SNAKE_LENGTH
+    previous = None
+    target = None
+    extra_steps = 0
 
     for _ in range(MAX_RANDOM_STEPS):
-        if current in food_cells:
-            eaten.add(current)
+        if head in food_cells and head not in eaten:
+            eaten.add(head)
+            snake_length += GROW_PER_FOOD + min(counts.get(head, 0), MAX_GROW_FROM_ONE_DAY)
+            snake_length = min(snake_length, MAX_SNAKE_LENGTH)
 
         remaining_food = list(food_cells - eaten)
 
         if not remaining_food:
-            after_finish_steps += 1
-            if after_finish_steps >= EXTRA_STEPS_AFTER_ALL_EATEN:
+            extra_steps += 1
+            if extra_steps >= EXTRA_STEPS_AFTER_ALL_EATEN:
                 break
             target = None
         else:
-            # Change target sometimes so movement looks less robotic.
-            if target not in remaining_food or random.random() < 0.18:
-                # Prefer one of the nearer contribution blocks, but still random.
-                remaining_food.sort(key=lambda c: manhattan(current, c))
+            if target not in remaining_food or random.random() < 0.20:
+                remaining_food.sort(key=lambda cell: manhattan(head, cell))
                 target = random.choice(remaining_food[:min(8, len(remaining_food))])
 
-        moves = neighbors(current, cols, rows)
+        next_moves = neighbors(head, cols, rows)
 
-        # Avoid immediately going backward when possible.
-        non_backtracking = [m for m in moves if m != previous]
-        if non_backtracking:
-            moves = non_backtracking
+        # avoid current body overlap
+        filtered = [cell for cell in next_moves if cell not in body_set]
 
-        next_cell = None
+        # if no move found, allow tail cell because tail can move away next step
+        if not filtered and len(body) > 1:
+            tail = body[0]
+            filtered = [cell for cell in next_moves if cell == tail]
+
+        if not filtered:
+            break
+
+        # avoid immediate backtracking when possible
+        non_back = [cell for cell in filtered if cell != previous]
+        if non_back:
+            filtered = non_back
 
         if target and random.random() < TARGET_CHASE_CHANCE:
-            best_distance = min(manhattan(m, target) for m in moves)
-            best_moves = [m for m in moves if manhattan(m, target) == best_distance]
-
-            # Add randomness even while chasing.
-            if random.random() < RANDOM_MOVE_CHANCE:
-                next_cell = random.choice(moves)
-            else:
-                next_cell = random.choice(best_moves)
+            best_dist = min(manhattan(cell, target) for cell in filtered)
+            best_moves = [cell for cell in filtered if manhattan(cell, target) == best_dist]
+            next_head = random.choice(best_moves)
         else:
-            next_cell = random.choice(moves)
+            next_head = random.choice(filtered)
 
-        previous = current
-        current = next_cell
-        path.append(current)
+        previous = head
+        head = next_head
+
+        body.append(head)
+        body_set.add(head)
+        path.append(head)
+
+        while len(body) > snake_length:
+            removed = body.popleft()
+            body_set.remove(removed)
 
     return path
 
@@ -257,7 +259,10 @@ def smooth_points(cell_path):
             t = step / FRAMES_PER_CELL
             t = t * t * (3 - 2 * t)
 
-            points.append((x1 + (x2 - x1) * t, y1 + (y2 - y1) * t))
+            px = x1 + (x2 - x1) * t
+            py = y1 + (y2 - y1) * t
+
+            points.append((px, py))
             cell_at_frame.append(cell_path[i])
 
     points.append(center_of_cell(*cell_path[-1]))
@@ -302,62 +307,76 @@ def make_snake_glow(width, height, body_points):
     return glow.filter(ImageFilter.GaussianBlur(4))
 
 
+def draw_snake_head(draw, hx, hy, dx, dy):
+    nx = -dy
+    ny = dx
+
+    # oval head
+    head_w = 9
+    head_h = 7
+
+    draw.ellipse(
+        [hx - head_w, hy - head_h, hx + head_w, hy + head_h],
+        fill=SNAKE_HEAD,
+    )
+
+    draw.ellipse(
+        [hx - 5, hy - 4, hx + 5, hy + 4],
+        fill=SNAKE_HEAD_INNER,
+    )
+
+    # eyes
+    for side in (-1, 1):
+        ex = hx + dx * 3.2 + nx * 2.6 * side
+        ey = hy + dy * 3.2 + ny * 2.6 * side
+        draw.ellipse([ex - 1.4, ey - 1.4, ex + 1.4, ey + 1.4], fill=WHITE)
+        draw.ellipse([ex - 0.5, ey - 0.5, ex + 0.5, ey + 0.5], fill=BLACK)
+
+    # tongue
+    sx = hx + dx * 7
+    sy = hy + dy * 7
+    mx = hx + dx * 11
+    my = hy + dy * 11
+    left_x = mx + nx * 1.5
+    left_y = my + ny * 1.5
+    right_x = mx - nx * 1.5
+    right_y = my - ny * 1.5
+
+    draw.line([(sx, sy), (mx, my)], fill=TONGUE, width=2)
+    draw.line([(mx, my), (left_x, left_y)], fill=TONGUE, width=1)
+    draw.line([(mx, my), (right_x, right_y)], fill=TONGUE, width=1)
+
+
 def draw_snake(draw, body_points):
     if len(body_points) < 2:
         return
 
-    # Continuous snake body.
     draw.line(body_points, fill=SNAKE_OUTER, width=10, joint="curve")
     draw.line(body_points, fill=SNAKE_INNER, width=6, joint="curve")
 
-    # Tail.
+    # tail
     tx, ty = body_points[0]
     draw.ellipse([tx - 3.5, ty - 3.5, tx + 3.5, ty + 3.5], fill=SNAKE_INNER)
 
-    # Head.
+    # head direction
     hx, hy = body_points[-1]
     px, py = body_points[-2]
 
     dx = hx - px
     dy = hy - py
     distance = math.hypot(dx, dy) or 1
-
     dx /= distance
     dy /= distance
 
-    nx = -dy
-    ny = dx
-
-    head_radius = 8
-    draw.ellipse(
-        [hx - head_radius, hy - head_radius, hx + head_radius, hy + head_radius],
-        fill=SNAKE_HEAD,
-    )
-
-    inner_radius = 5
-    draw.ellipse(
-        [hx - inner_radius, hy - inner_radius, hx + inner_radius, hy + inner_radius],
-        fill=SNAKE_HEAD_INNER,
-    )
-
-    # Eyes.
-    for side in (-1, 1):
-        ex = hx + dx * 3.8 + nx * 3.0 * side
-        ey = hy + dy * 3.8 + ny * 3.0 * side
-        draw.ellipse([ex - 1.3, ey - 1.3, ex + 1.3, ey + 1.3], fill=WHITE)
-
-    # Tongue.
-    start = (hx + dx * 7, hy + dy * 7)
-    end = (hx + dx * 12, hy + dy * 12)
-    draw.line([start, end], fill=TONGUE, width=2)
+    draw_snake_head(draw, hx, hy, dx, dy)
 
 
 def create_frames(cols, rows, counts):
     width = PADDING_X * 2 + cols * CELL + (cols - 1) * GAP
     height = PADDING_Y * 2 + rows * CELL + (rows - 1) * GAP
 
-    random_cell_path = build_random_path(cols, rows, counts)
-    points, cell_at_frame = smooth_points(random_cell_path)
+    cell_path = build_non_overlapping_cell_path(cols, rows, counts)
+    points, cell_at_frame = smooth_points(cell_path)
 
     frames = []
     eaten = set()
@@ -395,11 +414,11 @@ def create_frames(cols, rows, counts):
 def main():
     os.makedirs("dist", exist_ok=True)
 
-    # Different random path each workflow run.
     random.seed()
 
     calendar = fetch_contribution_calendar(GITHUB_USER_NAME)
     cols, rows, counts, total = build_grid(calendar)
+
     frames = create_frames(cols, rows, counts)
 
     frames[0].save(
