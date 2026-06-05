@@ -1,43 +1,64 @@
 import json
 import math
 import os
+import random
+import time
 import urllib.request
 from collections import deque
 from datetime import date
 
-from PIL import Image, ImageDraw, ImageFilter
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
+
+# =========================================================
+# COMPLETE RANDOM REAL CONTRIBUTION SNAKE
+# - Starts from left side
+# - Eats ALL real green contribution blocks
+# - Shows completion line + progress bar
+# - Does NOT use one fixed scanning path
+# - If it gets stuck, it restarts from the left side
+# =========================================================
 
 GITHUB_USER_NAME = os.environ.get("GITHUB_USER_NAME", "AshishKumar161")
 
+# 53 = full year, 26 = half year
 LAST_WEEKS = 53
 
+# Layout
 CELL = 10
 GAP = 3
 PADDING_X = 20
-PADDING_Y = 20
+PADDING_Y = 44
+BOTTOM_PADDING = 32
 
-FRAMES_PER_CELL = 4
-FRAME_DURATION_MS = 45
+# Animation speed/smoothness
+FRAMES_PER_CELL = 3
+FRAME_DURATION_MS = 50
 
+# Snake settings
 INITIAL_SNAKE_LENGTH = 12
-GROW_PER_FOOD = 5
-MAX_GROW_FROM_ONE_DAY = 10
-MAX_SNAKE_LENGTH = 180
+GROW_PER_FOOD = 4
+MAX_GROW_FROM_ONE_DAY = 8
+MAX_SNAKE_LENGTH = 155
 
-MAX_SEGMENT_STEPS = 500
-MAX_RESTARTS = 8
+# Safety limit
+MAX_RESTARTS = 250
 
+# Random target behavior
+RANDOM_TARGET_CHANCE = 0.45
+NEAR_TARGET_LIMIT = 8
+
+# Colors
 BG = (13, 17, 23)
 PANEL = (8, 13, 20)
 GRID_EMPTY = (22, 27, 34)
-GRID_EATEN = (10, 16, 22)
+GRID_EATEN = (8, 14, 20)
 
 LEVEL_COLORS = [
-    (22, 27, 34),
-    (14, 68, 41),
-    (0, 109, 50),
-    (38, 166, 65),
-    (57, 211, 83),
+    (22, 27, 34),    # 0 contributions
+    (14, 68, 41),    # low
+    (0, 109, 50),    # medium
+    (38, 166, 65),   # high
+    (57, 211, 83),   # very high
 ]
 
 SNAKE_OUTER = (0, 120, 55)
@@ -47,6 +68,27 @@ SNAKE_HEAD_INNER = (240, 140, 255)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 TONGUE = (255, 40, 120)
+PROGRESS_BG = (22, 27, 34)
+PROGRESS_FILL = (0, 255, 65)
+
+
+def load_font(size=13):
+    possible = [
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+    ]
+
+    for font_path in possible:
+        try:
+            return ImageFont.truetype(font_path, size)
+        except Exception:
+            pass
+
+    return ImageFont.load_default()
+
+
+FONT = load_font(13)
+SMALL_FONT = load_font(11)
 
 
 def fetch_contribution_calendar(username):
@@ -84,7 +126,7 @@ def fetch_contribution_calendar(username):
         headers={
             "Authorization": f"Bearer {token}",
             "Content-Type": "application/json",
-            "User-Agent": "left-start-restart-snake",
+            "User-Agent": "complete-random-contribution-snake",
         },
         method="POST",
     )
@@ -137,7 +179,10 @@ def build_grid(calendar):
     for x, week in enumerate(weeks):
         for day in week["contributionDays"]:
             d = date.fromisoformat(day["date"])
+
+            # GitHub grid starts from Sunday.
             y = (d.weekday() + 1) % 7
+
             count = int(day["contributionCount"])
             counts[(x, y)] = count
             total += count
@@ -158,6 +203,7 @@ def neighbors(cell, cols, rows):
     if y < rows - 1:
         result.append((x, y + 1))
 
+    random.shuffle(result)
     return result
 
 
@@ -165,76 +211,61 @@ def manhattan(a, b):
     return abs(a[0] - b[0]) + abs(a[1] - b[1])
 
 
-def row_priority(rows, target_y):
-    return sorted(range(rows), key=lambda y: (abs(y - target_y), y))
-
-
-def choose_left_start(cols, rows, remaining_food):
-    target_y = rows // 2
-
-    if remaining_food:
-        leftmost_target = min(remaining_food, key=lambda c: (c[0], abs(c[1] - rows // 2)))
-        target_y = leftmost_target[1]
-
-    for x in range(min(3, cols)):
-        for y in row_priority(rows, target_y):
-            return (x, y)
-
+def choose_left_start(rows):
     return (0, rows // 2)
 
 
-def bfs_path(start, goal, cols, rows, blocked, allow_tail=None):
-    blocked = set(blocked)
+def choose_target(current, remaining_food):
+    remaining = list(remaining_food)
+
+    if not remaining:
+        return None
+
+    # Sometimes choose any random contribution block.
+    # Sometimes choose one of the nearest blocks.
+    # This prevents the same fixed path in every run.
+    if random.random() < RANDOM_TARGET_CHANCE:
+        return random.choice(remaining)
+
+    remaining.sort(key=lambda cell: manhattan(current, cell))
+    return random.choice(remaining[:min(NEAR_TARGET_LIMIT, len(remaining))])
+
+
+def bfs_path(start, goal, cols, rows, blocked=None):
+    blocked = set(blocked or [])
     blocked.discard(start)
+    blocked.discard(goal)
 
-    if allow_tail is not None:
-        blocked.discard(allow_tail)
-
-    q = deque([start])
+    queue = deque([start])
     parent = {start: None}
 
-    while q:
-        cur = q.popleft()
+    while queue:
+        current = queue.popleft()
 
-        if cur == goal:
+        if current == goal:
             break
 
-        for nxt in neighbors(cur, cols, rows):
+        for nxt in neighbors(current, cols, rows):
             if nxt in parent:
                 continue
-            if nxt in blocked and nxt != goal:
+            if nxt in blocked:
                 continue
-            parent[nxt] = cur
-            q.append(nxt)
+
+            parent[nxt] = current
+            queue.append(nxt)
 
     if goal not in parent:
         return None
 
     path = []
-    cur = goal
-    while cur is not None:
-        path.append(cur)
-        cur = parent[cur]
+    current = goal
+
+    while current is not None:
+        path.append(current)
+        current = parent[current]
 
     path.reverse()
     return path
-
-
-def find_path_to_any_food(head, remaining_food, cols, rows, body_set, allow_tail):
-    if not remaining_food:
-        return None, None
-
-    candidates = sorted(
-        remaining_food,
-        key=lambda cell: (manhattan(head, cell), cell[0], cell[1])
-    )[:15]
-
-    for target in candidates:
-        path = bfs_path(head, target, cols, rows, body_set, allow_tail)
-        if path and len(path) >= 2:
-            return path, target
-
-    return None, None
 
 
 def build_segments(cols, rows, counts):
@@ -244,60 +275,82 @@ def build_segments(cols, rows, counts):
     segments = []
     restart_count = 0
 
-    while remaining_food and restart_count <= MAX_RESTARTS:
-        start = choose_left_start(cols, rows, remaining_food)
+    while remaining_food and restart_count < MAX_RESTARTS:
+        current = choose_left_start(rows)
 
-        body = deque([start])
-        body_set = {start}
+        snake_body = deque([current])
+        snake_body_set = {current}
         snake_length = INITIAL_SNAKE_LENGTH
 
-        segment = [start]
-        step_count = 0
+        segment = [current]
+        made_progress = False
 
-        if start in remaining_food:
-            remaining_food.remove(start)
-            snake_length += GROW_PER_FOOD + min(counts.get(start, 0), MAX_GROW_FROM_ONE_DAY)
-            snake_length = min(snake_length, MAX_SNAKE_LENGTH)
+        if current in remaining_food:
+            remaining_food.remove(current)
+            snake_length += GROW_PER_FOOD + min(counts.get(current, 0), MAX_GROW_FROM_ONE_DAY)
+            made_progress = True
 
-        while remaining_food and step_count < MAX_SEGMENT_STEPS:
-            head = body[-1]
-            tail = body[0]
-
-            path, _ = find_path_to_any_food(head, remaining_food, cols, rows, body_set, tail)
+        while remaining_food:
+            target = choose_target(current, remaining_food)
+            path = bfs_path(current, target, cols, rows, blocked=snake_body_set)
 
             if not path:
                 break
 
-            next_head = path[1]
+            stuck = False
 
-            # move
-            body.append(next_head)
-            body_set.add(next_head)
-            segment.append(next_head)
+            for next_cell in path[1:]:
+                tail = snake_body[0]
 
-            ate_food = False
+                if next_cell in snake_body_set and next_cell != tail:
+                    stuck = True
+                    break
 
-            if next_head in remaining_food:
-                remaining_food.remove(next_head)
-                snake_length += GROW_PER_FOOD + min(counts.get(next_head, 0), MAX_GROW_FROM_ONE_DAY)
-                snake_length = min(snake_length, MAX_SNAKE_LENGTH)
-                ate_food = True
+                current = next_cell
+                segment.append(current)
 
-            if not ate_food:
-                while len(body) > snake_length:
-                    removed = body.popleft()
-                    body_set.remove(removed)
+                snake_body.append(current)
+                snake_body_set.add(current)
+
+                ate = False
+
+                if current in remaining_food:
+                    remaining_food.remove(current)
+                    snake_length += GROW_PER_FOOD + min(counts.get(current, 0), MAX_GROW_FROM_ONE_DAY)
+                    snake_length = min(snake_length, MAX_SNAKE_LENGTH)
+                    ate = True
+                    made_progress = True
+
+                while len(snake_body) > snake_length:
+                    removed = snake_body.popleft()
+                    if removed not in snake_body:
+                        snake_body_set.discard(removed)
+
+                if ate:
+                    break
+
+            if stuck:
+                break
+
+        if len(segment) > 1:
+            segments.append(segment)
+
+        # Fallback so all green blocks definitely complete.
+        # If current body logic gets stuck, start from left and eat one block.
+        if not made_progress and remaining_food:
+            current = choose_left_start(rows)
+            target = choose_target(current, remaining_food)
+            force_path = bfs_path(current, target, cols, rows, blocked=None)
+
+            if force_path and len(force_path) > 1:
+                segments.append(force_path)
+                remaining_food.remove(target)
             else:
-                while len(body) > snake_length:
-                    removed = body.popleft()
-                    body_set.remove(removed)
+                break
 
-            step_count += 1
-
-        segments.append(segment)
         restart_count += 1
 
-    return segments
+    return segments, food_cells
 
 
 def smooth_points(cell_path):
@@ -352,14 +405,49 @@ def draw_grid(draw, cols, rows, counts, eaten):
                 draw.rounded_rectangle(glow_rect, radius=4, outline=(0, 255, 65), width=1)
 
 
+def draw_status(draw, width, eaten_count, total_food):
+    ratio = 1.0 if total_food == 0 else eaten_count / total_food
+
+    if total_food > 0 and eaten_count >= total_food:
+        text = f"Contribution Snake  |  Green blocks: {eaten_count}/{total_food}  |  COMPLETE"
+    else:
+        text = f"Contribution Snake  |  Green blocks: {eaten_count}/{total_food}"
+
+    draw.text((PADDING_X, 14), text, fill=(0, 255, 65), font=FONT)
+
+    graph_bottom = PADDING_Y + 7 * CELL + 6 * GAP
+    bar_x = PADDING_X
+    bar_y = graph_bottom + 14
+    bar_w = width - PADDING_X * 2
+    bar_h = 8
+
+    draw.rounded_rectangle(
+        [bar_x, bar_y, bar_x + bar_w, bar_y + bar_h],
+        radius=4,
+        fill=PROGRESS_BG,
+    )
+
+    fill_w = int(bar_w * ratio)
+
+    if fill_w > 0:
+        draw.rounded_rectangle(
+            [bar_x, bar_y, bar_x + fill_w, bar_y + bar_h],
+            radius=4,
+            fill=PROGRESS_FILL,
+        )
+
+    percent_text = f"{int(ratio * 100)}%"
+    draw.text((bar_x + bar_w - 34, bar_y - 3), percent_text, fill=WHITE, font=SMALL_FONT)
+
+
 def make_snake_glow(width, height, body_points):
     glow = Image.new("RGBA", (width, height), (0, 0, 0, 0))
-    gd = ImageDraw.Draw(glow)
+    glow_draw = ImageDraw.Draw(glow)
 
     if len(body_points) >= 2:
-        gd.line(body_points, fill=(0, 255, 65, 105), width=15, joint="curve")
+        glow_draw.line(body_points, fill=(0, 255, 65, 105), width=15, joint="curve")
         hx, hy = body_points[-1]
-        gd.ellipse([hx - 12, hy - 12, hx + 12, hy + 12], fill=(180, 0, 255, 145))
+        glow_draw.ellipse([hx - 12, hy - 12, hx + 12, hy + 12], fill=(180, 0, 255, 145))
 
     return glow.filter(ImageFilter.GaussianBlur(4))
 
@@ -426,16 +514,17 @@ def draw_snake(draw, body_points):
 
 def create_frames(cols, rows, counts):
     width = PADDING_X * 2 + cols * CELL + (cols - 1) * GAP
-    height = PADDING_Y * 2 + rows * CELL + (rows - 1) * GAP
+    height = PADDING_Y + rows * CELL + (rows - 1) * GAP + BOTTOM_PADDING
 
-    segments = build_segments(cols, rows, counts)
+    segments, food_cells = build_segments(cols, rows, counts)
 
     frames = []
     eaten = set()
+    snake_length = INITIAL_SNAKE_LENGTH
+    total_food = len(food_cells)
 
     for segment in segments:
         points, cell_at_frame = smooth_points(segment)
-        snake_length = INITIAL_SNAKE_LENGTH
 
         for frame_index in range(len(points)):
             head_cell = cell_at_frame[frame_index]
@@ -453,6 +542,7 @@ def create_frames(cols, rows, counts):
             draw = ImageDraw.Draw(image)
 
             draw_panel(draw, width, height)
+            draw_status(draw, width, len(eaten), total_food)
             draw_grid(draw, cols, rows, counts, eaten)
 
             glow = make_snake_glow(width, height, body_points)
@@ -463,8 +553,12 @@ def create_frames(cols, rows, counts):
 
             frames.append(image)
 
-        # small pause at end of each segment
-        for _ in range(4):
+        if frames:
+            for _ in range(3):
+                frames.append(frames[-1].copy())
+
+    if frames:
+        for _ in range(12):
             frames.append(frames[-1].copy())
 
     return frames
@@ -472,6 +566,9 @@ def create_frames(cols, rows, counts):
 
 def main():
     os.makedirs("dist", exist_ok=True)
+
+    # New route each workflow run.
+    random.seed(time.time_ns())
 
     calendar = fetch_contribution_calendar(GITHUB_USER_NAME)
     cols, rows, counts, total = build_grid(calendar)
