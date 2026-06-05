@@ -117,7 +117,7 @@ Status:      Learning, Building, Improving Daily
 
 <div align="center">
 
-<img width="100%" src="https://raw.githubusercontent.com/AshishKumar161/AshishKumar161/output/custom-snake.gif?v=70" alt="Real GitHub Contribution Growing Snake Animation" />
+<img width="100%" src="https://raw.githubusercontent.com/AshishKumar161/AshishKumar161/output/custom-snake.gif?v=90" alt="Real GitHub Contribution Growing Snake Animation" />
 
 </div>
 
