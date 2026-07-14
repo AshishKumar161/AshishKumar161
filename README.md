@@ -48,22 +48,22 @@ I am currently focused on building a strong GitHub profile by doing **daily codi
 
 <details>
   <summary><b><kbd> >_ cat current_focus.txt </kbd></b></summary>
-  <br>
-  <code>> 🛡️ Mastering cybersecurity fundamentals</code><br>
-  <code>> 💻 Deep-diving into C++ Data Structures (Trees, Graphs)</code><br>
-  <code>> 🐍 Fine-tuning Machine Learning models and RNNs</code><br>
-  <code>> 🧠 Solving complex LeetCode problems</code><br>
-  <code>> 🌐 Building responsive web development projects</code><br>
+  
+  > 🛡️ Mastering cybersecurity fundamentals
+  > 💻 Deep-diving into C++ Data Structures (Trees, Graphs)
+  > 🐍 Fine-tuning Machine Learning models and RNNs
+  > 🧠 Solving complex LeetCode problems
+  > 🌐 Building responsive web development projects
 </details>
 
 <details>
   <summary><b><kbd> >_ ./execute_2026_goals.sh </kbd></b></summary>
-  <br>
-  <code>[+] Solve DSA problems daily</code><br>
-  <code>[+] Push code on GitHub consistently</code><br>
-  <code>[+] Build Generative AI cybersecurity projects</code><br>
-  <code>[+] Improve LeetCode problem solving</code><br>
-  <code>[+] Secure internships and placements</code><br>
+  
+  > [+] Solve DSA problems daily
+  > [+] Push code on GitHub consistently
+  > [+] Build Generative AI cybersecurity projects
+  > [+] Improve LeetCode problem solving
+  > [+] Secure internships and placements
 </details>
 
 </div>
@@ -80,37 +80,16 @@ I am currently focused on building a strong GitHub profile by doing **daily codi
 
 ---
 
-<div align="center">
+## 📌 LIVE DEPLOYMENTS
 
-### 📌 LIVE DEPLOYMENTS
-
-<a href="https://github.com/AshishKumar161/Cyber-Threat-Report-Generator">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=AshishKumar161&repo=Cyber-Threat-Report-Generator&bg_color=0d1117&title_color=00ff41&text_color=c9d1d9&border_color=00ff41&icon_color=00ff41" width="48%" />
-</a>
-<a href="https://github.com/AshishKumar161/C-Logic-Building-Exercises">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=AshishKumar161&repo=C-Logic-Building-Exercises&bg_color=0d1117&title_color=00ff41&text_color=c9d1d9&border_color=00ff41&icon_color=00ff41" width="48%" />
-</a>
-<br>
-<a href="https://github.com/AshishKumar161/DSA-Daily-Practice">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=AshishKumar161&repo=DSA-Daily-Practice&bg_color=0d1117&title_color=00ff41&text_color=c9d1d9&border_color=00ff41&icon_color=00ff41" width="48%" />
-</a>
-<a href="https://github.com/AshishKumar161/Python-Mastery-Core">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=AshishKumar161&repo=Python-Mastery-Core&bg_color=0d1117&title_color=00ff41&text_color=c9d1d9&border_color=00ff41&icon_color=00ff41" width="48%" />
-</a>
-
-</div>
-
----
-
-## 📊 GitHub Stats
-
-<div align="center">
-
-<img width="48%" src="https://github-readme-stats.vercel.app/api?username=AshishKumar161&show_icons=true&theme=chartreuse-dark&hide_border=true" />
-
-<img width="48%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=AshishKumar161&layout=compact&theme=chartreuse-dark&hide_border=true" />
-
-</div>
+| 📂 Repository | 📝 Data Log |
+| :--- | :--- |
+| 🛡️ **[Cyber-Threat-Report-Generator](https://github.com/AshishKumar161/Cyber-Threat-Report-Generator)** | Generative AI threat detection system with HTML/CSS/JS GUI |
+| 🧩 **[C-Logic-Building-Exercises](https://github.com/AshishKumar161/C-Logic-Building-Exercises)** | 200 C++ OOP challenges focusing on linked lists, stacks & queues |
+| 📚 **[DSA-Daily-Practice](https://github.com/AshishKumar161/DSA-Daily-Practice)** | Daily Data Structures and Algorithms practice |
+| 🐍 **[Python-Mastery-Core](https://github.com/AshishKumar161/Python-Mastery-Core)** | Python fundamentals, Machine Learning & RNNs practice |
+| 🌐 **[Full-Stack-Development-Journey](https://github.com/AshishKumar161/Full-Stack-Development-Journey)** | Web development learning journey |
+| ⚡ **[LeetCode-Solutions](https://github.com/AshishKumar161/LeetCode-Solutions)** | Daily LeetCode problem solutions & Discrete Math logic applications |
 
 ---
 
