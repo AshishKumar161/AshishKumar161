@@ -18,9 +18,9 @@
 
 <div align="center">
 
-![Profile Views](https://komarev.com/ghpvc/?username=AshishKumar161\&label=Profile%20Visitors\&color=00ff41\&style=for-the-badge)
-![GitHub Followers](https://img.shields.io/github/followers/AshishKumar161?label=Followers\&style=for-the-badge\&color=00ff41)
-![GitHub Stars](https://img.shields.io/github/stars/AshishKumar161?label=Stars\&style=for-the-badge\&color=00ff41)
+![Profile Views](https://komarev.com/ghpvc/?username=AshishKumar161&label=Profile%20Visitors&color=00ff41&style=for-the-badge)
+![GitHub Followers](https://img.shields.io/github/followers/AshishKumar161?label=Followers&style=for-the-badge&color=00ff41)
+![GitHub Stars](https://img.shields.io/github/stars/AshishKumar161?label=Stars&style=for-the-badge&color=00ff41)
 
 </div>
 
@@ -36,14 +36,9 @@ I am currently focused on building a strong GitHub profile by doing **daily codi
 
 ## 🛡️ Cyber Profile
 
-```txt
-Name:        Ashish Kumar Pandit
-Role:        Cybersecurity Enthusiast | AI Student
-Focus:       DSA | Cybersecurity | AI/ML | Web Development
-Languages:   C++ | Python | JavaScript
-Tools:       Git | GitHub | VS Code | Node.js
-Status:      Learning, Building, Improving Daily
-```
+<div align="center">
+  <img src="terminal.svg" alt="Animated Cyber Profile Terminal" width="850" />
+</div>
 
 ---
 
@@ -70,14 +65,14 @@ Status:      Learning, Building, Improving Daily
 
 ## 📌 Featured Repositories
 
-| Project                           | Description                                         |
-| --------------------------------- | --------------------------------------------------- |
-| 🛡️ Cyber-Threat-Report-Generator | Cybersecurity project for generating threat reports |
-| 📚 DSA-Daily-Practice             | Daily Data Structures and Algorithms practice       |
-| 🧩 C-Logic-Building-Exercises     | C/C++ logic building problems                       |
-| 🐍 Python-Mastery-Core            | Python fundamentals and practice                    |
-| 🌐 Full-Stack-Development-Journey | Web development learning journey                    |
-| ⚡ LeetCode-Solutions              | Daily LeetCode problem solutions                    |
+| Project                               | Description                                                                 |
+| ------------------------------------- | --------------------------------------------------------------------------- |
+| 🛡️ [Cyber-Threat-Report-Generator](https://github.com/AshishKumar161/Cyber-Threat-Report-Generator) | Generative AI threat detection system with HTML/CSS/JS GUI                  |
+| 📚 [DSA-Daily-Practice](https://github.com/AshishKumar161/DSA-Daily-Practice)             | Daily Data Structures and Algorithms practice                               |
+| 🧩 [C-Logic-Building-Exercises](https://github.com/AshishKumar161/C-Logic-Building-Exercises)     | 200 C++ OOP challenges focusing on linked lists, stacks & queues            |
+| 🐍 [Python-Mastery-Core](https://github.com/AshishKumar161/Python-Mastery-Core)            | Python fundamentals, Machine Learning & RNNs practice                       |
+| 🌐 [Full-Stack-Development-Journey](https://github.com/AshishKumar161/Full-Stack-Development-Journey) | Web development learning journey                                            |
+| ⚡ [LeetCode-Solutions](https://github.com/AshishKumar161/LeetCode-Solutions)             | Daily LeetCode problem solutions & Discrete Math logic applications         |
 
 ---
 
@@ -121,8 +116,6 @@ Status:      Learning, Building, Improving Daily
 
 </div>
 
-
-
 ---
 
 ## 🎯 2026 Goals
@@ -134,27 +127,3 @@ Status:      Learning, Building, Improving Daily
 [+] Learn AI/ML deeply
 [+] Improve LeetCode problem solving
 [+] Prepare for internships and placements
-```
-
----
-
-## 📫 Connect With Me
-
-<div align="center">
-
-<a href="https://github.com/AshishKumar161">
-  <img src="https://img.shields.io/badge/GitHub-AshishKumar161-00FF41?style=for-the-badge&logo=github&logoColor=white" />
-</a>
-
-</div>
-
----
-
-<div align="center">
-
-### ⚡ Code. Learn. Build. Secure. Repeat.
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:003b1f,50:00ff41,100:000000&height=120&section=footer" />
-
-</div>
-
