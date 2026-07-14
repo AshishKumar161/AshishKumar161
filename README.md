@@ -37,19 +37,36 @@ I am currently focused on building a strong GitHub profile by doing **daily codi
 ## 🛡️ Cyber Profile
 
 <div align="center">
-  <img src="terminal.svg" alt="Animated Cyber Profile Terminal" width="850" />
+  <img src="cyber_hud.svg" alt="Animated Cyberpunk HUD" width="850" />
 </div>
 
 ---
 
-## 🔥 Current Focus
+<div align="center">
 
-* 🛡️ Learning cybersecurity fundamentals
-* 💻 Practicing C++ and DSA daily
-* 🧠 Solving LeetCode problems
-* 🐍 Learning Python for AI/ML
-* 🌐 Building web development projects
-* 📌 Improving GitHub profile with daily commits
+### 📂 SYSTEM_FILES
+
+<details>
+  <summary><b><kbd> >_ cat current_focus.txt </kbd></b></summary>
+  <br>
+  <code>> 🛡️ Mastering cybersecurity fundamentals</code><br>
+  <code>> 💻 Deep-diving into C++ Data Structures (Trees, Graphs)</code><br>
+  <code>> 🐍 Fine-tuning Machine Learning models and RNNs</code><br>
+  <code>> 🧠 Solving complex LeetCode problems</code><br>
+  <code>> 🌐 Building responsive web development projects</code><br>
+</details>
+
+<details>
+  <summary><b><kbd> >_ ./execute_2026_goals.sh </kbd></b></summary>
+  <br>
+  <code>[+] Solve DSA problems daily</code><br>
+  <code>[+] Push code on GitHub consistently</code><br>
+  <code>[+] Build Generative AI cybersecurity projects</code><br>
+  <code>[+] Improve LeetCode problem solving</code><br>
+  <code>[+] Secure internships and placements</code><br>
+</details>
+
+</div>
 
 ---
 
@@ -63,16 +80,25 @@ I am currently focused on building a strong GitHub profile by doing **daily codi
 
 ---
 
-## 📌 Featured Repositories
+<div align="center">
 
-| Project                               | Description                                                                 |
-| ------------------------------------- | --------------------------------------------------------------------------- |
-| 🛡️ [Cyber-Threat-Report-Generator](https://github.com/AshishKumar161/Cyber-Threat-Report-Generator) | Generative AI threat detection system with HTML/CSS/JS GUI                  |
-| 📚 [DSA-Daily-Practice](https://github.com/AshishKumar161/DSA-Daily-Practice)             | Daily Data Structures and Algorithms practice                               |
-| 🧩 [C-Logic-Building-Exercises](https://github.com/AshishKumar161/C-Logic-Building-Exercises)     | 200 C++ OOP challenges focusing on linked lists, stacks & queues            |
-| 🐍 [Python-Mastery-Core](https://github.com/AshishKumar161/Python-Mastery-Core)            | Python fundamentals, Machine Learning & RNNs practice                       |
-| 🌐 [Full-Stack-Development-Journey](https://github.com/AshishKumar161/Full-Stack-Development-Journey) | Web development learning journey                                            |
-| ⚡ [LeetCode-Solutions](https://github.com/AshishKumar161/LeetCode-Solutions)             | Daily LeetCode problem solutions & Discrete Math logic applications         |
+### 📌 LIVE DEPLOYMENTS
+
+<a href="https://github.com/AshishKumar161/Cyber-Threat-Report-Generator">
+  <img src="https://github-readme-stats.vercel.app/api/pin/?username=AshishKumar161&repo=Cyber-Threat-Report-Generator&bg_color=0d1117&title_color=00ff41&text_color=c9d1d9&border_color=00ff41&icon_color=00ff41" width="48%" />
+</a>
+<a href="https://github.com/AshishKumar161/C-Logic-Building-Exercises">
+  <img src="https://github-readme-stats.vercel.app/api/pin/?username=AshishKumar161&repo=C-Logic-Building-Exercises&bg_color=0d1117&title_color=00ff41&text_color=c9d1d9&border_color=00ff41&icon_color=00ff41" width="48%" />
+</a>
+<br>
+<a href="https://github.com/AshishKumar161/DSA-Daily-Practice">
+  <img src="https://github-readme-stats.vercel.app/api/pin/?username=AshishKumar161&repo=DSA-Daily-Practice&bg_color=0d1117&title_color=00ff41&text_color=c9d1d9&border_color=00ff41&icon_color=00ff41" width="48%" />
+</a>
+<a href="https://github.com/AshishKumar161/Python-Mastery-Core">
+  <img src="https://github-readme-stats.vercel.app/api/pin/?username=AshishKumar161&repo=Python-Mastery-Core&bg_color=0d1117&title_color=00ff41&text_color=c9d1d9&border_color=00ff41&icon_color=00ff41" width="48%" />
+</a>
+
+</div>
 
 ---
 
@@ -118,12 +144,22 @@ I am currently focused on building a strong GitHub profile by doing **daily codi
 
 ---
 
-## 🎯 2026 Goals
+## 📫 Connect With Me
 
-```txt
-[+] Solve DSA problems daily
-[+] Push code on GitHub consistently
-[+] Build cybersecurity projects
-[+] Learn AI/ML deeply
-[+] Improve LeetCode problem solving
-[+] Prepare for internships and placements
+<div align="center">
+
+<a href="https://github.com/AshishKumar161">
+  <img src="https://img.shields.io/badge/GitHub-AshishKumar161-00FF41?style=for-the-badge&logo=github&logoColor=white" />
+</a>
+
+</div>
+
+---
+
+<div align="center">
+
+### ⚡ Code. Learn. Build. Secure. Repeat.
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:003b1f,50:00ff41,100:000000&height=120&section=footer" />
+
+</div>
