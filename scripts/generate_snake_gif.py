@@ -22,13 +22,13 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont
 GITHUB_USER_NAME = os.environ.get("GITHUB_USER_NAME", "AshishKumar161")
 LAST_WEEKS = 53
 
-CELL          = 13
-GAP           = 3
-SIDE_W        = 0
-PADDING_X     = 14
-PADDING_Y     = 48
-BOTTOM_PAD    = 40
-MONTH_OFFSET  = 14
+CELL          = 16
+GAP           = 4
+SIDE_W        = 100
+PADDING_X     = 16
+PADDING_Y     = 52
+BOTTOM_PAD    = 44
+MONTH_OFFSET  = 16
 
 FRAMES_PER_CELL   = 4
 FRAME_DURATION_MS = 45
@@ -417,63 +417,66 @@ def draw_frame(draw, width, height, skin):
         draw.line([(cx,cy),(cx,cy+sy*bk)],     fill=HUD_CYAN, width=2)
 
 
-def draw_side_panel(draw, height, eaten, total_food, score, phase, skin):
-    W  = SIDE_W
-    cx = W // 2
-    draw.rectangle([4, 4, W-2, height-4], fill=SIDE_BG)
-    draw.line([(W-1, 4), (W-1, height-4)], fill=(0, 55, 28), width=1)
+def fetch_avatar(username, size=74):
+    """Download the GitHub profile photo and return a circular RGBA PIL image."""
+    from io import BytesIO
+    url = f"https://avatars.githubusercontent.com/{username}?v=4&s={size * 2}"
+    try:
+        with urllib.request.urlopen(url, timeout=12) as r:
+            data = r.read()
+        raw = Image.open(BytesIO(data)).convert("RGBA").resize((size, size), Image.LANCZOS)
+        # Circular mask
+        mask = Image.new("L", (size, size), 0)
+        ImageDraw.Draw(mask).ellipse([0, 0, size - 1, size - 1], fill=255)
+        raw.putalpha(mask)
+        return raw
+    except Exception:
+        return None
 
-    ay      = 14
-    eye_col = skin["eye_fill"]
-    acc_col = skin["hud_label"]
 
-    # Avatar ring
-    draw.ellipse([cx-28, ay,   cx+28, ay+56], fill=(9,18,13), outline=acc_col, width=1)
-    draw.ellipse([cx-25, ay+3, cx+25, ay+53], fill=(8,16,12),
-                 outline=lerp(acc_col, BLACK, 0.5), width=1)
-    draw.ellipse([cx-20, ay+4, cx+20, ay+37], fill=(11,28,17))
-    draw.arc([cx-20, ay+4, cx+20, ay+37], 200, 340, fill=acc_col, width=1)
-    draw.ellipse([cx-11, ay+17, cx+11, ay+32], fill=(7,15,11))
-    # Eyes
-    draw.ellipse([cx-9,  ay+20, cx-4,  ay+25], fill=eye_col)
-    draw.ellipse([cx-8,  ay+21, cx-5,  ay+24], fill=skin["eye_shine"])
-    draw.ellipse([cx+4,  ay+20, cx+9,  ay+25], fill=eye_col)
-    draw.ellipse([cx+5,  ay+21, cx+8,  ay+24], fill=skin["eye_shine"])
-    # Shoulders
-    draw.arc([cx-22, ay+37, cx+22, ay+57], 0, 180, fill=acc_col, width=2)
-    draw.line([(cx-19,ay+48),(cx-30,ay+56)], fill=acc_col, width=2)
-    draw.line([(cx-30,ay+56),(cx-34,ay+52)], fill=acc_col, width=1)
-    draw.line([(cx-30,ay+56),(cx-35,ay+57)], fill=acc_col, width=1)
-    draw.line([(cx-30,ay+56),(cx-33,ay+61)], fill=acc_col, width=1)
-    # Phase stars
+def draw_side_panel(base_img, draw, height, eaten, total_food, score, phase, skin, avatar=None):
+    W   = SIDE_W
+    cx  = W // 2
+    acc = skin["hud_label"]
+    draw.rectangle([4, 4, W - 2, height - 4], fill=SIDE_BG)
+    draw.line([(W - 1, 4), (W - 1, height - 4)], fill=(0, 55, 28), width=1)
+
+    # ── Profile photo (real GitHub avatar) ────────────────
+    av_size = 74
+    av_x    = cx - av_size // 2
+    av_y    = 10
+    if avatar is not None:
+        # Glowing ring behind photo
+        draw.ellipse(
+            [av_x - 3, av_y - 3, av_x + av_size + 3, av_y + av_size + 3],
+            outline=acc, width=2,
+        )
+        base_img.paste(avatar, (av_x, av_y), avatar)   # paste with alpha mask
+    else:
+        # Fallback: plain circle placeholder
+        draw.ellipse([av_x, av_y, av_x + av_size, av_y + av_size],
+                     fill=(15, 25, 18), outline=acc, width=2)
+        draw.text((cx, av_y + av_size // 2), "?", fill=acc, font=F_XL, anchor="mm")
+
+    # Phase stars below photo
+    star_y = av_y + av_size + 6
     for pi in range(phase + 1):
-        sx2 = cx - 12 + pi * 6
-        draw.text((sx2, ay+2), "*", fill=LEVELUP_COLORS[pi], font=F_SM, anchor="lt")
-    # Body dots
-    for gx in range(cx-10, cx+12, 7):
-        for gy in range(ay+38, ay+54, 6):
-            draw.rectangle([gx, gy, gx+2, gy+2], fill=lerp(acc_col, BLACK, 0.6))
+        sx2 = cx - (phase * 5) // 2 + pi * 10
+        draw.text((sx2, star_y), "★", fill=LEVELUP_COLORS[pi], font=F_SM, anchor="mm")
 
-    draw.line([(8, ay+64), (W-8, ay+64)], fill=(0,48,24), width=1)
+    draw.line([(6, star_y + 14), (W - 6, star_y + 14)], fill=(0, 48, 24), width=1)
 
-    sy2 = ay + 74
-    draw.text((cx, sy2),      "SCORE",    fill=HUD_CYAN, font=F_SM, anchor="mm")
-    draw.text((cx, sy2 + 16), str(score), fill=acc_col,  font=F_LG, anchor="mm")
+    sy2 = star_y + 26
+    draw.text((cx, sy2),       "SCORE",              fill=HUD_CYAN,           font=F_SM, anchor="mm")
+    draw.text((cx, sy2 + 16),  str(score),           fill=acc,                font=F_LG, anchor="mm")
 
     fy = sy2 + 38
-    draw.text((cx, fy),       "FOOD",               fill=HUD_CYAN, font=F_SM, anchor="mm")
-    draw.text((cx, fy + 16),  f"{eaten}/{total_food}", fill=acc_col, font=F_MD, anchor="mm")
+    draw.text((cx, fy),        "FOOD",               fill=HUD_CYAN,           font=F_SM, anchor="mm")
+    draw.text((cx, fy + 16),   f"{eaten}/{total_food}", fill=acc,             font=F_MD, anchor="mm")
 
     lv = fy + 38
-    draw.text((cx, lv),       "LEVEL",      fill=HUD_CYAN,              font=F_SM, anchor="mm")
-    draw.text((cx, lv + 16),  str(phase+1), fill=LEVELUP_COLORS[phase], font=F_LG, anchor="mm")
-
-    li = lv + 38
-    draw.text((cx, li), "LIFE", fill=HUD_CYAN, font=F_SM, anchor="mm")
-    for i in range(3):
-        ix = cx - 14 + i * 14
-        draw.ellipse([ix-5, li+11, ix+5, li+21], fill=acc_col)
-        draw.ellipse([ix-2, li+14, ix+2, li+18], fill=(0, 80, 35))
+    draw.text((cx, lv),        "LEVEL",              fill=HUD_CYAN,              font=F_SM, anchor="mm")
+    draw.text((cx, lv + 16),   str(phase + 1),       fill=LEVELUP_COLORS[phase], font=F_LG, anchor="mm")
 
 
 def draw_header(draw, width, username, eaten, total, skin):
@@ -719,8 +722,8 @@ def draw_levelup_banner(draw, width, height, phase, progress):
               fill=lerp(BG, WHITE, alpha * 0.85), font=F_MD, anchor="mm")
 
 
-def create_frames(cols, rows, counts, month_labels):
-    ox = 20       # left padding (no side panel)
+def create_frames(cols, rows, counts, month_labels, avatar=None):
+    ox = SIDE_W + 18   # left of grid (after side panel)
     oy = PADDING_Y
     grid_w = cols * (CELL + GAP) - GAP
     grid_h = rows * (CELL + GAP) - GAP
@@ -774,7 +777,7 @@ def create_frames(cols, rows, counts, month_labels):
         draw = ImageDraw.Draw(img)
         draw_frame(draw, width, height, skin)
         draw_header(draw, width, GITHUB_USER_NAME, len(eaten), total_food, skin)
-        # side panel removed
+        draw_side_panel(img, draw, height, len(eaten), total_food, score, phase, skin, avatar)
         draw_month_labels(draw, month_labels, ox, oy)
         draw_weekday_labels(draw, rows, ox, oy)
         draw_grid(draw, cols, rows, counts, eaten, ox, oy, flash_cells)
@@ -804,7 +807,10 @@ def main():
     random.seed(time.time_ns())
     calendar                          = fetch_contribution_calendar(GITHUB_USER_NAME)
     cols, rows, counts, total, months = build_grid(calendar)
-    frames                            = create_frames(cols, rows, counts, months)
+    print("Fetching GitHub avatar...")
+    avatar = fetch_avatar(GITHUB_USER_NAME)
+    print("Avatar fetched" if avatar else "Avatar not available (using placeholder)")
+    frames                            = create_frames(cols, rows, counts, months, avatar)
     frames[0].save(
         "dist/custom-snake.gif",
         save_all=True,
