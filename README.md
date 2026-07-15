@@ -1,3 +1,10 @@
+## 🛡️ Cyber Profile
+
+<div align="center">
+  <img src="terminal.svg" alt="Animated Cyber Profile Terminal" width="850" />
+</div>
+
+---
 <div align="center">
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,50:00ff41,100:003b1f&height=220&section=header&text=Ashish%20Kumar%20Pandit&fontSize=45&fontColor=ffffff&animation=twinkling&fontAlignY=35&desc=Cybersecurity%20Enthusiast%20%7C%20AI%20Student%20%7C%20DSA%20Learner&descAlignY=55&descSize=17" />
@@ -34,13 +41,6 @@ I am currently focused on building a strong GitHub profile by doing **daily codi
 
 ---
 
-## 🛡️ Cyber Profile
-
-<div align="center">
-  <img src="terminal.svg" alt="Animated Cyber Profile Terminal" width="850" />
-</div>
-
----
 
 ## 🔥 Current Focus
 
