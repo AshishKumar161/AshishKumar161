@@ -28,11 +28,11 @@
 ```yaml
 name      : Ashish Kumar
 alias     : AshishKumar161
-degree    : B.Tech — Computer Science Engineering
+degree    : B.Tech in Computer Science Engineering
 role      : Aspiring Software Engineer
-interests : [Software Engineering, DSA, Full-Stack Dev, Cybersecurity, AI/ML, Open Source]
+interests : [Software Engineering, DSA, Full-Stack Development, Cybersecurity, AI/ML, Open Source]
 location  : India 🇮🇳
-goal      : Software Engineer @ Google — building software that impacts millions
+goal      : Become a Software Engineer at Google, building software that impacts millions.
 status    : Actively Learning & Building
 mantra    : "Code every day. Push every day. Never stop."
 ```
@@ -60,28 +60,28 @@ mantra    : "Code every day. Push every day. Never stop."
 
 <table>
   <tr>
-    <td>📚 <b>DSA &amp; Problem Solving</b></td>
+    <td>📚 <b>DSA & Problem Solving</b></td>
     <td>Solving LeetCode problems daily — arrays, trees, graphs, DP</td>
   </tr>
   <tr>
     <td>💻 <b>Full Stack Development</b></td>
-    <td>Building production-ready apps with React, Node.js &amp; MongoDB</td>
+    <td>Building full-stack web applications with React, Node.js, and MongoDB.</td>
   </tr>
   <tr>
     <td>☁️ <b>Cloud Computing</b></td>
     <td>Learning cloud infrastructure and deployment fundamentals</td>
   </tr>
   <tr>
-    <td>🤖 <b>AI &amp; Machine Learning</b></td>
-    <td>Exploring ML models, RNNs, and real-world AI applications</td>
+    <td>🤖 <b>AI & Machine Learning</b></td>
+    <td>Learning machine learning fundamentals and exploring real-world AI applications.</td>
   </tr>
   <tr>
     <td>🔒 <b>Cybersecurity</b></td>
-    <td>Ethical hacking, threat detection, and security fundamentals</td>
+    <td>Learning ethical hacking, threat detection, and cybersecurity fundamentals.</td>
   </tr>
   <tr>
     <td>🌱 <b>Open Source</b></td>
-    <td>Contributing to open source and building a green GitHub graph</td>
+    <td>Preparing to contribute to open-source projects while building a consistent GitHub activity.</td>
   </tr>
 </table>
 
@@ -199,8 +199,8 @@ mantra    : "Code every day. Push every day. Never stop."
 
 ## 🎮 Cyber Snake — Live Contribution Animator
 
-> 🐍 A custom-built Python engine renders every contribution block as food for the snake.
-> The snake **levels up and transforms** as it eats — changing colour, glow, and head shape through **5 distinct phases**, all driven by real GitHub data, regenerated daily via GitHub Actions.
+> 🐍 A custom Python animation engine renders every GitHub contribution as food for the snake.
+> The snake **levels up and transforms** as it eats—changing its color, glow, and head shape through **five distinct phases**. The animation is driven by real GitHub contribution data and regenerated daily using GitHub Actions.
 
 <div align="center">
 
@@ -257,5 +257,5 @@ mantra    : "Code every day. Push every day. Never stop."
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:003b1f,50:00ff41,100:000000&height=120&section=footer" />
 
 <div align="center">
-  <sub>⭐ Thanks for visiting! Built with passion by <b>Ashish Kumar</b> · Auto-updated daily by GitHub Actions</sub>
+  <sub>🛡️ Crafted by <b>Ashish Kumar</b> • Powered by GitHub Actions • Always Building, Always Learning</sub>
 </div>
