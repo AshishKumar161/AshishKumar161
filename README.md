@@ -1,7 +1,3 @@
-<div align="center">
-  <img src="terminal.svg" alt="Ashish Kumar Pandit — Cyber Terminal" width="860" />
-</div>
-
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,40:001a0d,70:00ff41,100:003b1f&height=230&section=header&text=Ashish%20Kumar%20Pandit&fontSize=48&fontColor=ffffff&animation=twinkling&fontAlignY=36&desc=Cybersecurity%20Enthusiast%20%7C%20AI%20Student%20%7C%20DSA%20Grinder&descAlignY=56&descSize=18" />
 
 <div align="center">
@@ -160,7 +156,7 @@ mantra    : "Code every day. Push every day. Never stop."
 
 ## 🎮 Cyber Snake — Live Contribution Animator
 
-> 🐍 A custom-built Python engine renders every contribution block as food for the snake.  
+> 🐍 A custom-built Python engine renders every contribution block as food for the snake.
 > The snake **levels up and transforms** as it eats — changing colour, glow, and head shape through **5 distinct phases**, all driven by real GitHub data, regenerated daily via GitHub Actions.
 
 <div align="center">
@@ -168,19 +164,6 @@ mantra    : "Code every day. Push every day. Never stop."
 <img width="100%" src="https://raw.githubusercontent.com/AshishKumar161/AshishKumar161/output/custom-snake.gif" alt="Cyber Snake Game — GitHub Contribution Animator" />
 
 </div>
-
-
-
----
-
-## 🤖 Automation — GitHub Actions
-
-Two workflows keep the profile auto-updated every day at midnight UTC:
-
-| Workflow | Schedule | What it does |
-|----------|----------|--------------|
-| 🐍 **Snake Animator** | Daily + every push | Fetches live contribution data → renders multi-phase snake GIF → pushes to `output` branch |
-| 🌐 **3D Contribution Globe** | Daily | Generates `profile-3d-contrib/profile-night-green.svg` |
 
 ---
 
@@ -223,7 +206,6 @@ Two workflows keep the profile auto-updated every day at midnight UTC:
 [![GitHub](https://img.shields.io/badge/GitHub-AshishKumar161-00ff41?style=for-the-badge&logo=github&logoColor=white)](https://github.com/AshishKumar161)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/AshishKumar161)
 [![LeetCode](https://img.shields.io/badge/LeetCode-Profile-FFA116?style=for-the-badge&logo=leetcode&logoColor=white)](https://leetcode.com/AshishKumar161)
-[![Email](https://img.shields.io/badge/Email-Contact%20Me-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:ashishkumar161@example.com)
 
 </div>
 
