@@ -2,11 +2,11 @@
   <img src="terminal.svg" alt="Ashish Kumar — Cyber Terminal" width="860" />
 </div>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,40:001a0d,70:00ff41,100:003b1f&height=230&section=header&text=Ashish%20Kumar&fontSize=52&fontColor=ffffff&animation=twinkling&fontAlignY=36&desc=Software%20Engineer%20in%20the%20Making%20%7C%20DSA%20%7C%20Full%20Stack%20%7C%20AI%20%7C%20Cybersecurity&descAlignY=56&descSize=17" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,40:001a0d,70:00ff41,100:003b1f&height=230&section=header&text=Ashish%20Kumar&fontSize=52&fontColor=ffffff&animation=twinkling&fontAlignY=36&desc=B.Tech%20CSE%20Student%20%7C%20Aspiring%20Software%20Engineer%20%7C%20DSA%20%7C%20Full%20Stack%20%7C%20AI&descAlignY=56&descSize=17" />
 
 <div align="center">
 
-<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&duration=2500&pause=800&color=00FF41&center=true&vCenter=true&width=900&lines=Hi+%F0%9F%91%8B+I'm+Ashish+Kumar;B.Tech+Computer+Science+Student;Future+Software+Engineer+%40+Google+%F0%9F%8E%AF;DSA+%7C+Full+Stack+%7C+AI%2FML+%7C+Cybersecurity;Building+scalable+software%2C+one+commit+at+a+time+%F0%9F%9A%80" />
+<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&duration=2500&pause=800&color=00FF41&center=true&vCenter=true&width=900&lines=Hi+%F0%9F%91%8B+I'm+Ashish+Kumar;B.Tech+CSE+Student+%7C+Aspiring+Software+Engineer;Daily+DSA+%7C+Full+Stack+%7C+AI%2FML+%7C+Cybersecurity;Building+scalable+software%2C+one+commit+at+a+time+%F0%9F%9A%80" />
 
 </div>
 
@@ -28,7 +28,8 @@
 ```yaml
 name      : Ashish Kumar
 alias     : AshishKumar161
-degree    : B.Tech — Computer Science
+degree    : B.Tech — Computer Science Engineering
+role      : Aspiring Software Engineer
 interests : [Software Engineering, DSA, Full-Stack Dev, Cybersecurity, AI/ML, Open Source]
 location  : India 🇮🇳
 goal      : Software Engineer @ Google — building software that impacts millions
