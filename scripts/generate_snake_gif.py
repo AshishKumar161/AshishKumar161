@@ -1,4 +1,4 @@
-﻿import json
+import json
 import math
 import os
 import random
@@ -24,7 +24,7 @@ LAST_WEEKS = 53
 
 CELL          = 13
 GAP           = 3
-SIDE_W        = 88
+SIDE_W        = 0
 PADDING_X     = 14
 PADDING_Y     = 48
 BOTTOM_PAD    = 40
@@ -720,7 +720,7 @@ def draw_levelup_banner(draw, width, height, phase, progress):
 
 
 def create_frames(cols, rows, counts, month_labels):
-    ox = SIDE_W + 20 + 10
+    ox = 20       # left padding (no side panel)
     oy = PADDING_Y
     grid_w = cols * (CELL + GAP) - GAP
     grid_h = rows * (CELL + GAP) - GAP
@@ -774,7 +774,7 @@ def create_frames(cols, rows, counts, month_labels):
         draw = ImageDraw.Draw(img)
         draw_frame(draw, width, height, skin)
         draw_header(draw, width, GITHUB_USER_NAME, len(eaten), total_food, skin)
-        draw_side_panel(draw, height, len(eaten), total_food, score, phase, skin)
+        # side panel removed
         draw_month_labels(draw, month_labels, ox, oy)
         draw_weekday_labels(draw, rows, ox, oy)
         draw_grid(draw, cols, rows, counts, eaten, ox, oy, flash_cells)

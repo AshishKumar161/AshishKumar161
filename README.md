@@ -1,4 +1,4 @@
-﻿<div align="center">
+<div align="center">
   <img src="terminal.svg" alt="Ashish Kumar Pandit — Cyber Terminal" width="860" />
 </div>
 
@@ -169,17 +169,7 @@ mantra    : "Code every day. Push every day. Never stop."
 
 </div>
 
-<div align="center">
 
-| Phase | Trigger | Skin | Head Style |
-|:-----:|:-------:|------|:----------:|
-| 1 | Start | 🟢 **Cyber Green** | Diamond |
-| 2 | 20% eaten | 🔵 **Electric Blue** | Arrow |
-| 3 | 40% eaten | 🟣 **Plasma Purple** | Cobra Hood |
-| 4 | 60% eaten | 🟠 **Fire Orange** | Dragon + Horns |
-| 5 | 80% eaten | 🟡 **Golden Elite** | Crown + Gem |
-
-</div>
 
 ---
 
