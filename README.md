@@ -1,8 +1,8 @@
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,40:001a0d,70:00ff41,100:003b1f&height=230&section=header&text=Ashish%20Kumar%20Pandit&fontSize=48&fontColor=ffffff&animation=twinkling&fontAlignY=36&desc=Cybersecurity%20Enthusiast%20%7C%20AI%20Student%20%7C%20DSA%20Grinder&descAlignY=56&descSize=18" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,40:001a0d,70:00ff41,100:003b1f&height=230&section=header&text=Ashish%20Kumar&fontSize=52&fontColor=ffffff&animation=twinkling&fontAlignY=36&desc=Software%20Engineer%20in%20the%20Making%20%7C%20DSA%20%7C%20Full%20Stack%20%7C%20AI%20%7C%20Cybersecurity&descAlignY=56&descSize=17" />
 
 <div align="center">
 
-<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=24&duration=2500&pause=800&color=00FF41&center=true&vCenter=true&width=900&lines=Welcome+to+my+Cyber+Space+%F0%9F%9B%A1%EF%B8%8F;Cybersecurity+Enthusiast+%7C+AI+Student;Daily+DSA+%7C+Daily+GitHub+Push+%F0%9F%94%A5;C%2B%2B+%7C+Python+%7C+JavaScript+%7C+Security;Building+the+future%2C+one+commit+at+a+time" />
+<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&duration=2500&pause=800&color=00FF41&center=true&vCenter=true&width=900&lines=Hi+%F0%9F%91%8B+I'm+Ashish+Kumar;B.Tech+Computer+Science+Student;Future+Software+Engineer+%40+Google+%F0%9F%8E%AF;DSA+%7C+Full+Stack+%7C+AI%2FML+%7C+Cybersecurity;Building+scalable+software%2C+one+commit+at+a+time+%F0%9F%9A%80" />
 
 </div>
 
@@ -22,14 +22,32 @@
 ## 🧑‍💻 About Me
 
 ```yaml
-name      : Ashish Kumar Pandit
+name      : Ashish Kumar
 alias     : AshishKumar161
-degree    : B.Tech — Artificial Intelligence
-interests : [Cybersecurity, DSA, AI/ML, Web Development, Open Source]
+degree    : B.Tech — Computer Science
+interests : [Software Engineering, DSA, Full-Stack Dev, Cybersecurity, AI/ML, Open Source]
 location  : India 🇮🇳
+goal      : Software Engineer @ Google — building software that impacts millions
 status    : Actively Learning & Building
 mantra    : "Code every day. Push every day. Never stop."
 ```
+
+---
+
+## 🎯 Career Goal
+
+<div align="center">
+
+```
+╔══════════════════════════════════════════════════════════╗
+║          🎯 MISSION: SOFTWARE ENGINEER @ GOOGLE          ║
+╠══════════════════════════════════════════════════════════╣
+║  Build scalable, high-impact software used by millions.  ║
+║  Master DSA → System Design → Crack top-tier interviews. ║
+╚══════════════════════════════════════════════════════════╝
+```
+
+</div>
 
 ---
 
@@ -37,28 +55,28 @@ mantra    : "Code every day. Push every day. Never stop."
 
 <table>
   <tr>
-    <td>🛡️ <b>Cybersecurity</b></td>
+    <td>📚 <b>DSA &amp; Problem Solving</b></td>
+    <td>Solving LeetCode problems daily — arrays, trees, graphs, DP</td>
+  </tr>
+  <tr>
+    <td>💻 <b>Full Stack Development</b></td>
+    <td>Building production-ready apps with React, Node.js &amp; MongoDB</td>
+  </tr>
+  <tr>
+    <td>☁️ <b>Cloud Computing</b></td>
+    <td>Learning cloud infrastructure and deployment fundamentals</td>
+  </tr>
+  <tr>
+    <td>🤖 <b>AI &amp; Machine Learning</b></td>
+    <td>Exploring ML models, RNNs, and real-world AI applications</td>
+  </tr>
+  <tr>
+    <td>🔒 <b>Cybersecurity</b></td>
     <td>Ethical hacking, threat detection, and security fundamentals</td>
   </tr>
   <tr>
-    <td>💻 <b>DSA &amp; C++</b></td>
-    <td>Solving problems daily — arrays, trees, graphs, dynamic programming</td>
-  </tr>
-  <tr>
-    <td>🧠 <b>LeetCode Grind</b></td>
-    <td>Consistent daily problem solving for placement prep</td>
-  </tr>
-  <tr>
-    <td>🐍 <b>Python &amp; AI/ML</b></td>
-    <td>Exploring ML models, RNNs, and data science tooling</td>
-  </tr>
-  <tr>
-    <td>🌐 <b>Full Stack Web</b></td>
-    <td>Building real-world apps with Node.js, HTML/CSS/JS</td>
-  </tr>
-  <tr>
-    <td>📌 <b>GitHub Consistency</b></td>
-    <td>Daily commits — building a green contribution graph</td>
+    <td>🌱 <b>Open Source</b></td>
+    <td>Contributing to open source and building a green GitHub graph</td>
   </tr>
 </table>
 
@@ -72,13 +90,33 @@ mantra    : "Code every day. Push every day. Never stop."
 
 <img src="https://skillicons.dev/icons?i=cpp,python,js,html,css" />
 
-**Frameworks &amp; Tools**
+**Frontend &amp; Backend**
 
-<img src="https://skillicons.dev/icons?i=nodejs,express,git,github,vscode,linux" />
+<img src="https://skillicons.dev/icons?i=react,nodejs,express,mysql,mongodb" />
+
+**Tools &amp; Platforms**
+
+<img src="https://skillicons.dev/icons?i=git,github,vscode,linux" />
 
 **Learning Next**
 
-<img src="https://skillicons.dev/icons?i=react,mongodb,docker,bash" />
+<img src="https://skillicons.dev/icons?i=docker,aws,bash,figma" />
+
+</div>
+
+---
+
+## 📚 Currently Learning
+
+<div align="center">
+
+| Area | Topics |
+|------|--------|
+| 🧠 **CS Fundamentals** | Operating Systems · Computer Networks · DBMS · System Design |
+| 🌐 **Web Dev** | React · Node.js · REST APIs · Full Stack Architecture |
+| ☁️ **Cloud** | Cloud Computing · Deployment · Infrastructure basics |
+| 🤖 **AI/ML** | Machine Learning · Neural Networks · Data Science |
+| 💻 **DSA** | Advanced Algorithms · Competitive Programming |
 
 </div>
 
@@ -104,7 +142,7 @@ mantra    : "Code every day. Push every day. Never stop."
 | 📚 [DSA-Daily-Practice](https://github.com/AshishKumar161/DSA-Daily-Practice) | Daily Data Structures and Algorithms practice | `C++` |
 | 🧩 [C-Logic-Building-Exercises](https://github.com/AshishKumar161/C-Logic-Building-Exercises) | 200 C++ OOP challenges — linked lists, stacks &amp; queues | `C++` `OOP` |
 | 🐍 [Python-Mastery-Core](https://github.com/AshishKumar161/Python-Mastery-Core) | Python fundamentals, Machine Learning &amp; RNNs practice | `Python` `ML` |
-| 🌐 [Full-Stack-Development-Journey](https://github.com/AshishKumar161/Full-Stack-Development-Journey) | Web development learning journey | `Node` `JS` `CSS` |
+| 🌐 [Full-Stack-Development-Journey](https://github.com/AshishKumar161/Full-Stack-Development-Journey) | Web development learning journey | `Node` `JS` `React` |
 | ⚡ [LeetCode-Solutions](https://github.com/AshishKumar161/LeetCode-Solutions) | Daily LeetCode solutions &amp; Discrete Math logic | `C++` `Python` |
 
 </div>
@@ -177,11 +215,11 @@ mantra    : "Code every day. Push every day. Never stop."
 ╠══════════════════════════════════════════════════════╣
 ║  [✔] Solve DSA problems daily                        ║
 ║  [✔] Push code on GitHub consistently                ║
-║  [ ] Build cybersecurity projects & tools            ║
-║  [ ] Learn AI/ML deeply — build real ML models       ║
-║  [ ] Reach 200+ LeetCode problems solved             ║
-║  [ ] Build a full-stack web application              ║
-║  [ ] Land a tech internship or placement             ║
+║  [ ] Master System Design fundamentals               ║
+║  [ ] Build 3+ production-ready full-stack projects   ║
+║  [ ] Learn Cloud Computing (AWS/GCP)                 ║
+║  [ ] Reach 300+ LeetCode problems solved             ║
+║  [ ] Land a top-tier tech internship or placement    ║
 ╚══════════════════════════════════════════════════════╝
 ```
 
@@ -214,5 +252,5 @@ mantra    : "Code every day. Push every day. Never stop."
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:003b1f,50:00ff41,100:000000&height=120&section=footer" />
 
 <div align="center">
-  <sub>⚡ Built with passion by <b>Ashish Kumar Pandit</b> · Auto-updated daily by GitHub Actions</sub>
+  <sub>⭐ Thanks for visiting! Built with passion by <b>Ashish Kumar</b> · Auto-updated daily by GitHub Actions</sub>
 </div>
