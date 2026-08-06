@@ -154,16 +154,16 @@ mantra    : "Code every day. Push every day. Never stop."
 
 ---
 
-## 📊 GitHub Stats
+// ## 📊 GitHub Stats
 
-<div align="center">
+<!-- <div align="center">
 
 <img width="49%" src="https://github-readme-stats.vercel.app/api?username=AshishKumar161&show_icons=true&theme=chartreuse-dark&hide_border=true&include_all_commits=true&count_private=true" />
 <img width="49%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=AshishKumar161&layout=compact&theme=chartreuse-dark&hide_border=true&langs_count=8" />
 
 </div>
 
----
+--- -->
 
 ## 🔥 GitHub Streak
 
@@ -175,15 +175,15 @@ mantra    : "Code every day. Push every day. Never stop."
 
 ---
 
-## 📈 Contribution Activity
+// ## 📈 Contribution Activity
 
-<div align="center">
+<!-- <div align="center">
 
 <img src="https://github-readme-activity-graph.vercel.app/graph?username=AshishKumar161&theme=chartreuse-dark&hide_border=true&area=true&custom_title=Ashish%27s+Contribution+Activity" />
 
 </div>
 
----
+--- -->
 
 ## 🌐 3D Contribution Globe
 
