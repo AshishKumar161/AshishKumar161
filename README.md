@@ -2,7 +2,7 @@
   <img src="terminal.svg" alt="Ashish Kumar — Cyber Terminal" width="860" />
 </div>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,40:001a0d,70:00ff41,100:003b1f&height=230&section=header&text=Ashish%20Kumar&fontSize=52&fontColor=ffffff&animation=twinkling&fontAlignY=36&desc=B.Tech%20CSE%20Student%20%7C%20Aspiring%20Software%20Engineer%20%7C%20DSA%20%7C%20Full%20Stack%20%7C%20AI&descAlignY=56&descSize=17" />
+<!-- <img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,40:001a0d,70:00ff41,100:003b1f&height=230&section=header&text=Ashish%20Kumar&fontSize=52&fontColor=ffffff&animation=twinkling&fontAlignY=36&desc=B.Tech%20CSE%20Student%20%7C%20Aspiring%20Software%20Engineer%20%7C%20DSA%20%7C%20Full%20Stack%20%7C%20AI&descAlignY=56&descSize=17" /> -->
 
 <!-- <div align="center">
 
