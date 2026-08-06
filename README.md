@@ -154,8 +154,6 @@ mantra    : "Code every day. Push every day. Never stop."
 
 ---
 
-// ## 📊 GitHub Stats
-
 <!-- <div align="center">
 
 <img width="49%" src="https://github-readme-stats.vercel.app/api?username=AshishKumar161&show_icons=true&theme=chartreuse-dark&hide_border=true&include_all_commits=true&count_private=true" />
@@ -175,7 +173,7 @@ mantra    : "Code every day. Push every day. Never stop."
 
 ---
 
-// ## 📈 Contribution Activity
+
 
 <!-- <div align="center">
 
