@@ -229,7 +229,7 @@ mantra    : "Code every day. Push every day. Never stop."
 
 ---
 
-## 💬 Dev Quote
+<!-- ## 💬 Dev Quote
 
 <div align="center">
 
@@ -237,7 +237,7 @@ mantra    : "Code every day. Push every day. Never stop."
 
 </div>
 
----
+--- -->
 
 ## 🤝 Connect With Me
 
