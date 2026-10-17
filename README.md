@@ -181,7 +181,7 @@ mantra    : "Code every day. Push every day. Never stop."
 </div>
 
 --- -->
-
+<!--
  ## 🌐 3D Contribution Globe
 
 <div align="center">
@@ -192,7 +192,7 @@ mantra    : "Code every day. Push every day. Never stop."
 
 </div>
 
----
+--- -->
 
 ## 🎮 Cyber Snake — Live Contribution Animator
 
